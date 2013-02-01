@@ -1,0 +1,6 @@
+endpoint = "https://my.comodit.com/api"
+username = "user"
+password = "pass"
+organization = "My organization"
+time_out = 60 * 30 # seconds
+email = "me@example.com"

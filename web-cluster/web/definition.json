@@ -1,0 +1,232 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "Web tier of our demo \nWeb Cluster", 
+    "directories": [], 
+    "documentation": "This recipes deploys a wordpress and all its dependencies.\n\n- A MySQL database is installed and configured\n- An Apache environment with PHP is installed\n- Wordpress install is performed, creating a blog with an admin user\n\nThe blog title and description can be set on install, but further changes will have to be done through the wordpress admin panel.", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "install.php", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/wordpress/install.php", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "install.php"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "wordpress.conf", 
+            "owner": "root", 
+            "path": "/etc/httpd/conf.d/wordpress.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "wordpress.conf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "footer.php", 
+            "owner": "root", 
+            "path": "/usr/share/wordpress/wp-content/themes/twentytwelve/footer.php", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "footer.php"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "wp-config.php", 
+            "owner": "root", 
+            "path": "/etc/wordpress/wp-config.php", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "wp-config.php"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "install.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/wordpress/on_install.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "install.sh"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://install.sh"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://install.php"
+                }, 
+                {
+                    "action": "update", 
+                    "resource": "file://wp-config.php"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://install.sh"
+                }
+            ], 
+            "on": [
+                "wp_db_name", 
+                "wp_db_host"
+            ]
+        }
+    ], 
+    "license": "Copyright (c) 2012 Guardis SPRL\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n", 
+    "name": "Cluster-Web", 
+    "organization": "Demo", 
+    "packages": [
+        {
+            "name": "wordpress"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "The title of your blog.", 
+            "key": "wp_blog_title", 
+            "name": "Blog title", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "My wordpress blog", 
+            "version": 1
+        }, 
+        {
+            "description": "The password to access the database", 
+            "key": "wp_db_password", 
+            "name": "Database Password", 
+            "schema": {
+                "advanced": true, 
+                "secret": true, 
+                "type": "string"
+            }, 
+            "value": "secret", 
+            "version": 1
+        }, 
+        {
+            "description": "The username having access to the database.", 
+            "key": "wp_db_username", 
+            "name": "Database Username", 
+            "schema": {
+                "advanced": true, 
+                "type": "string"
+            }, 
+            "value": "wordpress", 
+            "version": 1
+        }, 
+        {
+            "description": "The hostname of the database server", 
+            "key": "wp_db_host", 
+            "name": "Database Host", 
+            "schema": {
+                "advanced": true, 
+                "type": "string"
+            }, 
+            "value": "localhost", 
+            "version": 1
+        }, 
+        {
+            "description": "The password of the blog admin user", 
+            "key": "wp_admin_password", 
+            "name": "Admin password", 
+            "schema": {
+                "required": true, 
+                "secret": true, 
+                "type": "string"
+            }, 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "wp_blog_description", 
+            "name": "Blog description", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "A wordpress blog deployed by ComodIT", 
+            "version": 1
+        }, 
+        {
+            "description": "The database name of this wordpress deployment.", 
+            "key": "wp_db_name", 
+            "name": "Database Name", 
+            "schema": {
+                "advanced": true, 
+                "type": "string"
+            }, 
+            "value": "wordpress", 
+            "version": 1
+        }, 
+        {
+            "description": "The email of the admin user.", 
+            "key": "wp_admin_email", 
+            "name": "Admin email", 
+            "schema": {
+                "pattern": "\\S+@\\S+\\.\\S+", 
+                "required": true, 
+                "type": "string"
+            }, 
+            "version": 1
+        }, 
+        {
+            "description": "The username of the blog admin user", 
+            "key": "wp_admin_username", 
+            "name": "Admin username", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "admin", 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "httpd"
+        }
+    ], 
+    "url": "http://wordpress.org", 
+    "users": [], 
+    "uuid": "0ED8E2F0439111E2AD1EB0A1AC1F0212", 
+    "version": 9
+}

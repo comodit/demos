@@ -1,0 +1,1 @@
+delete from mysql.user where user = '' ;

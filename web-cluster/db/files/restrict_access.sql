@@ -1,0 +1,1 @@
+delete from mysql.user where host <> 'localhost' and host <> '127.0.0.1' ;

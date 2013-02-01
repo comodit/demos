@@ -1,0 +1,88 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "Load balancer tier of our demo Web Cluster", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "nginx.conf", 
+            "owner": "root", 
+            "path": "/etc/nginx/nginx.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "nginx.conf"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://nginx.conf"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://nginx"
+                }
+            ], 
+            "on": [
+                "upstream", 
+                "fail_timeout"
+            ]
+        }
+    ], 
+    "name": "Cluster-LoadBalancer", 
+    "organization": "Demo", 
+    "packages": [
+        {
+            "name": "nginx"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "", 
+            "key": "fail_timeout", 
+            "name": "Fail Timeout", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "30s", 
+            "version": 1
+        }, 
+        {
+            "description": "List of upstream hosts", 
+            "key": "upstream", 
+            "name": "Upstream Hosts", 
+            "schema": {
+                "items": {
+                    "type": "string"
+                }, 
+                "type": "array"
+            }, 
+            "value": [
+                "localhost"
+            ], 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "nginx"
+        }
+    ], 
+    "url": "", 
+    "users": [], 
+    "uuid": "0B063010439111E2AD1EB0A1AC1F0212", 
+    "version": 5
+}

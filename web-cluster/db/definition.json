@@ -1,0 +1,388 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "Database tier of our demo Web Cluster", 
+    "directories": [], 
+    "documentation": "After installation, you have a MySQL database installed with only root user defined. No databases are available. To add databases, users and grants, please add associated settings. Note that these settings are \"add-only\", updates and removals will be ignored.", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "700", 
+            "name": "add_dbs.sh", 
+            "owner": "root", 
+            "path": "/usr/share/comodit/mysql/add_dbs.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "add_dbs.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "700", 
+            "name": "uninstall.sh", 
+            "owner": "root", 
+            "path": "/usr/share/comodit/mysql/uninstall.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "uninstall.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "700", 
+            "name": "add_grants.sh", 
+            "owner": "root", 
+            "path": "/usr/share/comodit/mysql/add_grants.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "add_grants.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "my.cnf", 
+            "owner": "root", 
+            "path": "/etc/my.cnf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "my.cnf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "600", 
+            "name": "clear_anonymous.sql", 
+            "owner": "root", 
+            "path": "/usr/share/comodit/mysql/clear_anonymous.sql", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "clear_anonymous.sql"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "700", 
+            "name": "add_users.sh", 
+            "owner": "root", 
+            "path": "/usr/share/comodit/mysql/add_users.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "add_users.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "700", 
+            "name": "install.sh", 
+            "owner": "root", 
+            "path": "/usr/share/comodit/mysql/install.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "install.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "600", 
+            "name": "restrict_access.sql", 
+            "owner": "root", 
+            "path": "/usr/share/comodit/mysql/restrict_access.sql", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "restrict_access.sql"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://add_dbs.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://add_dbs.sh"
+                }
+            ], 
+            "on": [
+                "dbs"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://add_users.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://add_users.sh"
+                }
+            ], 
+            "on": [
+                "users"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://my.cnf"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://mysqld"
+                }
+            ], 
+            "on": [
+                "mysql_bind_addr", 
+                "mysql_port"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://add_grants.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://add_grants.sh"
+                }
+            ], 
+            "on": [
+                "grants"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://install.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://add_dbs.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://add_users.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://add_grants.sh"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://uninstall.sh"
+                }
+            ], 
+            "on": [
+                "clear_data_on_uninstall"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://uninstall.sh"
+                }
+            ], 
+            "on": [
+                "_uninstall"
+            ]
+        }
+    ], 
+    "license": "Copyright (c) 2012 Gerard Dethier\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n", 
+    "name": "Cluster-Database", 
+    "organization": "Demo", 
+    "packages": [
+        {
+            "name": "mysql-server"
+        }, 
+        {
+            "name": "mysql"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "The databases to create initially.", 
+            "key": "dbs", 
+            "name": "Databases", 
+            "schema": {
+                "items": {
+                    "type": "string"
+                }, 
+                "type": "array"
+            }, 
+            "version": 1
+        }, 
+        {
+            "description": "The users to define initially.", 
+            "key": "users", 
+            "name": "Users", 
+            "schema": {
+                "items": {
+                    "properties": {
+                        "host": {
+                            "description": "User's host. If left empty, localhost is used.", 
+                            "pretty": "Hostname", 
+                            "type": "string"
+                        }, 
+                        "name": {
+                            "description": "User name", 
+                            "index": true, 
+                            "pretty": "Name", 
+                            "type": "string"
+                        }, 
+                        "password": {
+                            "description": "User's password", 
+                            "pretty": "Password", 
+                            "secret": true, 
+                            "type": "string"
+                        }
+                    }, 
+                    "type": "object"
+                }, 
+                "type": "array"
+            }, 
+            "version": 1
+        }, 
+        {
+            "description": "The grants to setup initially.", 
+            "key": "grants", 
+            "name": "Grants", 
+            "schema": {
+                "items": {
+                    "properties": {
+                        "db": {
+                            "description": "The database targetted by this rule.", 
+                            "pretty": "Database", 
+                            "type": "string"
+                        }, 
+                        "host": {
+                            "description": "The user's hostname (e.g. localhost, % stands for any remote host).", 
+                            "pretty": "Hostname", 
+                            "type": "string"
+                        }, 
+                        "name": {
+                            "description": "The name of the rule.", 
+                            "index": true, 
+                            "pretty": "Name", 
+                            "type": "string"
+                        }, 
+                        "priv_type": {
+                            "default": "ALL", 
+                            "description": "The type of the grant (e.g. ALL, SELECT, UPDATE, etc.).", 
+                            "pretty": "Grant Type", 
+                            "type": "string"
+                        }, 
+                        "tab": {
+                            "default": "*", 
+                            "description": "The table targetted by this rule, * stands for all tables.", 
+                            "pretty": "Table", 
+                            "type": "string"
+                        }, 
+                        "user": {
+                            "description": "The user targetted by this rule.", 
+                            "pretty": "User", 
+                            "type": "string"
+                        }
+                    }, 
+                    "type": "object"
+                }, 
+                "type": "array"
+            }, 
+            "version": 1
+        }, 
+        {
+            "description": "If true, data are cleared on uninstall.", 
+            "key": "clear_data_on_uninstall", 
+            "name": "Clear Data On Uninstall", 
+            "schema": {
+                "advanced": true, 
+                "type": "boolean"
+            }, 
+            "value": false, 
+            "version": 1
+        }, 
+        {
+            "description": "Password for root user.", 
+            "key": "root_pass", 
+            "name": "Root Password", 
+            "schema": {
+                "required": true, 
+                "secret": true, 
+                "type": "string"
+            }, 
+            "version": 1
+        }, 
+        {
+            "description": "The address the server binds to. Skipped if no value is set.", 
+            "key": "mysql_bind_addr", 
+            "name": "Bind Address", 
+            "schema": {
+                "advanced": true, 
+                "type": "string"
+            }, 
+            "version": 1
+        }, 
+        {
+            "description": "Port the server is listening to.", 
+            "key": "mysql_port", 
+            "name": "Server Port", 
+            "schema": {
+                "advanced": true, 
+                "type": "integer"
+            }, 
+            "value": 3306, 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "mysqld"
+        }
+    ], 
+    "url": "http://www.mysql.com", 
+    "users": [], 
+    "uuid": "050CCCA0439111E2AD1EB0A1AC1F0212", 
+    "version": 12
+}
