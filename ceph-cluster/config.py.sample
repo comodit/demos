@@ -1,0 +1,21 @@
+endpoint = "https://my.comodit.com/api"
+username = "<user>"
+password = "<password>"
+
+organization = "My organization"
+time_out = 60 * 30  # seconds
+
+admin_key = "AQAEKwlRgBqsDhAA7cwN/JtEyCym6vYN/ixHqA=="
+
+platform = {"name" : "EC2",
+            "settings" : {
+                     "ec2.instanceType": "t1.micro",
+                     "ec2.securityGroups": "default",
+                     "ec2.zone": "eu-west-1a",
+                     "ec2.keyPair": "<Key name>"
+                         }
+            }
+
+centos = {"name" : "CentOS 6.3 (AMI)",
+          "settings" : {}
+          }

@@ -1,0 +1,187 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "", 
+    "directories": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "etc", 
+            "owner": "root", 
+            "path": "/etc/ceph/"
+        }
+    ], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "600", 
+            "name": "admin.keyring", 
+            "owner": "root", 
+            "path": "/etc/ceph/keyring", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "admin.keyring"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "ceph.conf", 
+            "owner": "root", 
+            "path": "/etc/ceph/ceph.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "ceph.conf"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://ceph.conf"
+                }
+            ], 
+            "on": [
+                "monitors", 
+                "osds", 
+                "mdss"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://admin.keyring"
+                }
+            ], 
+            "on": [
+                "admin_key"
+            ]
+        }
+    ], 
+    "name": "Ceph Configuration", 
+    "organization": "Gerard", 
+    "packages": [
+        {
+            "name": "ceph"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "", 
+            "key": "mdss", 
+            "name": "MDSs", 
+            "schema": {
+                "items": {
+                    "properties": {
+                        "host": {
+                            "type": "string"
+                        }, 
+                        "id": {
+                            "index": true, 
+                            "type": "string"
+                        }
+                    }, 
+                    "type": "object"
+                }, 
+                "type": "array"
+            }, 
+            "value": [], 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "osds", 
+            "name": "OSDs", 
+            "schema": {
+                "items": {
+                    "properties": {
+                        "host": {
+                            "type": "string"
+                        }, 
+                        "id": {
+                            "index": true, 
+                            "type": "string"
+                        }
+                    }, 
+                    "type": "object"
+                }, 
+                "type": "array"
+            }, 
+            "value": [], 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "gw", 
+            "name": "Gateway", 
+            "schema": {
+                "properties": {
+                    "host": {
+                        "type": "string"
+                    }
+                }, 
+                "type": "object"
+            }, 
+            "version": 3
+        }, 
+        {
+            "description": "", 
+            "key": "monitors", 
+            "name": "Monitors", 
+            "schema": {
+                "items": {
+                    "properties": {
+                        "addr": {
+                            "type": "string"
+                        }, 
+                        "host": {
+                            "type": "string"
+                        }, 
+                        "id": {
+                            "index": true, 
+                            "type": "string"
+                        }
+                    }, 
+                    "type": "object"
+                }, 
+                "type": "array"
+            }, 
+            "value": [], 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "admin_key", 
+            "name": "Admin Key", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "AQAEKwlRgBqsDhAA7cwN/JtEyCym6vYN/ixHqA==", 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [
+        {
+            "components": [], 
+            "location": "http://ceph.com/rpm-bobtail/el6/x86_64/", 
+            "name": "Ceph-bobtail"
+        }
+    ], 
+    "services": [], 
+    "url": "", 
+    "users": [], 
+    "uuid": "DCCB4E606C4911E283F80F02AC1F0212", 
+    "version": 18
+}

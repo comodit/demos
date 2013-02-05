@@ -1,0 +1,131 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "uninstall.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/ceph/uninstall-osd.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "uninstall.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "on_status_change.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/ceph/osd/on_status_change.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "on_status_change.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "install.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/ceph/install-osd.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "install.sh"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://on_status_change.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://on_status_change.sh"
+                }
+            ], 
+            "on": [
+                "status"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://uninstall.sh"
+                }
+            ], 
+            "on": [
+                "_uninstall"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://install.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://on_status_change.sh"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }
+    ], 
+    "name": "Ceph Object Store", 
+    "organization": "Gerard", 
+    "packages": [], 
+    "parameters": [
+        {
+            "description": "", 
+            "key": "status", 
+            "name": "Status", 
+            "schema": {
+                "enum": [
+                    "in", 
+                    "out"
+                ], 
+                "type": "string"
+            }, 
+            "value": "in", 
+            "version": 2
+        }, 
+        {
+            "description": "", 
+            "key": "osd_id", 
+            "name": "ODS Id", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "0", 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [], 
+    "url": "", 
+    "users": [], 
+    "uuid": "8D84E6E06EA611E2B81A69E4AC1F0212", 
+    "version": 10
+}

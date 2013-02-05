@@ -1,0 +1,84 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "uninstall.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/ceph/uninstall-mds.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "uninstall.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "install.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/ceph/install-mds.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "install.sh"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://install.sh"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://uninstall.sh"
+                }
+            ], 
+            "on": [
+                "_uninstall"
+            ]
+        }
+    ], 
+    "name": "Ceph Metadata", 
+    "organization": "Gerard", 
+    "packages": [], 
+    "parameters": [
+        {
+            "description": "", 
+            "key": "mds_id", 
+            "name": "MDS Id", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "0", 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [], 
+    "url": "", 
+    "users": [], 
+    "uuid": "50205E106AF011E290D49AAFAC1F0212", 
+    "version": 51
+}

@@ -1,0 +1,150 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "uninstall.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/ceph/uninstall-boot.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "uninstall.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "on_status_change.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/ceph/mon/on_status_change.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "on_status_change.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "install.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/ceph/install-mon.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "install.sh"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://on_status_change.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://on_status_change.sh"
+                }
+            ], 
+            "on": [
+                "status"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://uninstall.sh"
+                }
+            ], 
+            "on": [
+                "_uninstall"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://install.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://on_status_change.sh"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }
+    ], 
+    "name": "Ceph Monitor", 
+    "organization": "Gerard", 
+    "packages": [], 
+    "parameters": [
+        {
+            "description": "", 
+            "key": "status", 
+            "name": "Status", 
+            "schema": {
+                "enum": [
+                    "up", 
+                    "down"
+                ], 
+                "type": "string"
+            }, 
+            "value": "up", 
+            "version": 2
+        }, 
+        {
+            "description": "", 
+            "key": "mon_id", 
+            "name": "Monitor ID", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "0", 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "mon_addr", 
+            "name": "Monitor Address", 
+            "schema": {
+                "type": "string"
+            }, 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "bootstrap", 
+            "name": "Bootstrap", 
+            "schema": {
+                "type": "boolean"
+            }, 
+            "value": false, 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [], 
+    "url": "", 
+    "users": [], 
+    "uuid": "216539306EA411E2B81A69E4AC1F0212", 
+    "version": 10
+}
