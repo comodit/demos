@@ -13,12 +13,21 @@ point to the same database server. Finally, when scaling down,
 load balancer is re-configured to stop pointing to some web servers which are
 removed from the cluster.
 
+## Support
+
+If you run into issues using this script, or if you have more complex requirements, feel free
+to reach out to us by sending an email to *support@comodit.com*. You can also reach out
+through our other [support channels](http://www.comodit.com/resources/support.html).
+
 ## Pre-requisites
 
 In order to execute this example, you need:
 
 1. a ComodIT account,
 2. an organization containing a platform called "EC2" and using *AmazonEC2* driver.
+3. the ComodIT Python library (bundled with command-line interface, see [this
+tutorial](http://comodit.com/resources/tutorials/cli.html) for information about
+how to install it).
 
 ## Usage
 
