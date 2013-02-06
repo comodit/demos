@@ -1,0 +1,141 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "A simple NFS Server deployment with configurable share.", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "exports", 
+            "owner": "root", 
+            "path": "/etc/exports", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "exports"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "on_update", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/nfs-server/update.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "on_update"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://on_update"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://nfs"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://exports"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://on_update"
+                }
+            ], 
+            "on": [
+                "shares"
+            ]
+        }
+    ], 
+    "name": "NFS Server", 
+    "organization": "Demo", 
+    "packages": [
+        {
+            "name": "nfs-utils"
+        }, 
+        {
+            "name": "rpcbind"
+        }, 
+        {
+            "name": "nfs-utils-lib"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "A list of shares to export.", 
+            "key": "shares", 
+            "name": "NFS Shares", 
+            "schema": {
+                "items": {
+                    "properties": {
+                        "create": {
+                            "default": true, 
+                            "description": "Create the folder if it does not exists.", 
+                            "pretty": "Create folder", 
+                            "type": "boolean"
+                        }, 
+                        "options": {
+                            "default": "ro", 
+                            "description": "Comma separated list of options for the mounted share.", 
+                            "pretty": "Options", 
+                            "required": true, 
+                            "type": "string"
+                        }, 
+                        "path": {
+                            "description": "Absolute path to export", 
+                            "pretty": "Export Path", 
+                            "required": true, 
+                            "type": "string"
+                        }, 
+                        "source": {
+                            "default": "*", 
+                            "description": "NFS clients that can access this share.", 
+                            "pretty": "Authorized clients", 
+                            "required": true, 
+                            "type": "string"
+                        }
+                    }, 
+                    "type": "object"
+                }, 
+                "type": "array"
+            }, 
+            "version": 3
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "nfs"
+        }, 
+        {
+            "enabled": true, 
+            "name": "rpcbind"
+        }
+    ], 
+    "url": "", 
+    "users": [], 
+    "uuid": "E1F62800704B11E2ABC42B7EAC1F0212", 
+    "version": 11
+}

@@ -6,3 +6,4 @@ README):
 
 - web-cluster: auto-scaling of a web cluster.
 - ceph-cluster: auto-scaling of a Ceph cluster.
+- renderfarm: deploy and scale a Blender 3D rendering farm.

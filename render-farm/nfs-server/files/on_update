@@ -1,0 +1,13 @@
+#!/bin/sh
+
+<#if shares??>
+  <#list shares as share>
+    <#if share.create?? && share.create>
+if [ ! -d "${share.path}" ]; then
+  mkdir -p ${share.path}
+fi
+    </#if> 
+  </#list>
+</#if> 
+
+/usr/sbin/exportfs -a

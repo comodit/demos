@@ -1,0 +1,7 @@
+# This file is managed by a ComodIT recipe, do not modify manually 
+
+<#if shares??>
+  <#list shares as share>
+${share.path} ${share.source}(${share.options})
+  </#list>
+</#if> 

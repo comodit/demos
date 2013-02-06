@@ -1,0 +1,115 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "Mount nfs share on-demand with autofs.", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "auto.misc", 
+            "owner": "root", 
+            "path": "/etc/auto.misc", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "auto.misc"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "auto.master", 
+            "owner": "root", 
+            "path": "/etc/auto.master", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "auto.master"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://auto.misc"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://autofs"
+                }
+            ], 
+            "on": [
+                "shares"
+            ]
+        }
+    ], 
+    "name": "NFS Client", 
+    "organization": "Demo", 
+    "packages": [
+        {
+            "name": "nfs-utils"
+        }, 
+        {
+            "name": "autofs"
+        }, 
+        {
+            "name": "nfs-utils-lib"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "NFS Shares to automaticaly mount.", 
+            "key": "shares", 
+            "name": "NFS Shares", 
+            "schema": {
+                "items": {
+                    "properties": {
+                        "key": {
+                            "description": "Automount key", 
+                            "pretty": "Key", 
+                            "required": true, 
+                            "type": "string"
+                        }, 
+                        "location": {
+                            "description": "Automount target location", 
+                            "pretty": "Target", 
+                            "required": true, 
+                            "type": "string"
+                        }, 
+                        "options": {
+                            "default": "ro", 
+                            "description": "Automount options", 
+                            "pretty": "Options", 
+                            "required": true, 
+                            "type": "string"
+                        }
+                    }, 
+                    "type": "object"
+                }, 
+                "type": "array"
+            }, 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "autofs"
+        }
+    ], 
+    "url": "", 
+    "users": [], 
+    "uuid": "E3534700704B11E2ABC42B7EAC1F0212", 
+    "version": 4
+}

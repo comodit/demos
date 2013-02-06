@@ -1,0 +1,25 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "The Blender 3D Application.", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [], 
+    "groups": [], 
+    "handlers": [], 
+    "name": "Blender", 
+    "organization": "Demo", 
+    "packages": [
+        {
+            "name": "blender"
+        }
+    ], 
+    "parameters": [], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [], 
+    "url": "", 
+    "users": [], 
+    "uuid": "2AFDE6B0705511E2ABC42B7EAC1F0212", 
+    "version": 2
+}
