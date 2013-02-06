@@ -1,4 +1,4 @@
-# ComodIT Demo
+# ComodIT Cloud Orchestration Demos
 
 This project is a repository of orchestration examples using ComodIT's
 Python library. Each directory contains an example (each example has its own
