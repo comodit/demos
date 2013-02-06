@@ -46,7 +46,7 @@ def deploy():
         try:
             mon = env.get_host('Monitor ' + str(i))
         except EntityNotFoundException:
-            mon = create_host(env, 'Monitor ' + str(i), config.platform, config.centos, conf_app)
+            mon = create_host(env, 'Monitor ' + str(i), config.platform, config.distribution, conf_app)
             print "Deploying Monitor " + str(i)
             mon.provision()
         mon_hosts.append(mon)
@@ -56,7 +56,7 @@ def deploy():
         try:
             osd = env.get_host('Object Store ' + str(i))
         except EntityNotFoundException:
-            osd = create_host(env, 'Object Store ' + str(i), config.platform, config.centos, conf_app)
+            osd = create_host(env, 'Object Store ' + str(i), config.platform, config.distribution, conf_app)
             print "Deploying Object Store " + str(i)
             osd.provision()
         osd_hosts.append(osd)

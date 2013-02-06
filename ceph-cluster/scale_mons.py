@@ -27,7 +27,7 @@ def scale_mons(count):
     conf_app = [{"name": "Ceph Configuration", "settings": {}}]
     mon_hosts = []
     for i in xrange(latest_id + 1, latest_id + count + 1):
-        mon = create_host(env, 'Monitor ' + str(i), config.platform, config.centos, conf_app)
+        mon = create_host(env, 'Monitor ' + str(i), config.platform, config.distribution, conf_app)
         print "Deploying Monitor " + str(i)
         mon.provision()
         mon_hosts.append(mon)

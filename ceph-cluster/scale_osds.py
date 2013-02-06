@@ -27,7 +27,7 @@ def scale_osds(count):
     conf_app = [{"name": "Ceph Configuration", "settings": {}}]
     osd_hosts = []
     for i in xrange(latest_id + 1, latest_id + count + 1):
-        osd = create_host(env, 'Object Store ' + str(i), config.platform, config.centos, conf_app)
+        osd = create_host(env, 'Object Store ' + str(i), config.platform, config.distribution, conf_app)
         print "Deploying Object Store " + str(i)
         osd.provision()
         osd_hosts.append(osd)
