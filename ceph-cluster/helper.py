@@ -1,4 +1,4 @@
-import time, sys, os, config, data
+import time, sys, os, config
 
 from comodit_client.api.exceptions import PythonApiException
 from comodit_client.rest.exceptions import ApiException

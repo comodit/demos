@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import config, data
+import config
 
 from comodit_client.api import Client
 from comodit_client.api.collection import EntityNotFoundException
