@@ -18,6 +18,9 @@ In order to execute this example, you need:
 2. an organization with a platform and a distribution (other than the demo
 platform and distribution). For instance, you may configure an EC2 platform
 and use the CentOS 6.3 AMI from the store as distribution.
+3. the ComodIT Python library (bundled with command-line interface, see [this
+tutorial](http://comodit.com/resources/tutorials/cli.html) for information about
+how to install it).
 
 ## Usage
 
