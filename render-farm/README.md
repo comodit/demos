@@ -39,30 +39,28 @@ and organization name as well as the platform and distribution to use.
 2. Setup ComodIT by executing *setup.py*. This will create an environment for the
 render farm as well as the applications needed to deploy it.
 
-    ./setup.py
+        ./setup.py
 
 3. Deploy the initial render farm by executing *deploy.py*. You can use the argument `--count=` to specify
 the number of render slaves to deploy.
 
-    ./deploy.py --count=10
+        ./deploy.py --count=10
 
 4. If at a later stage you want to deploy more slaves, just use the *scale.py* command.
 
-    ./scale.py --count=5
+        ./scale.py --count=5
 
 5. When you don't need your cluster, you can also downscale it using *downscale.py*.
 
-    ./downscale --count=15
+        ./downscale --count=15
 
 6. If you want to teardown the complete render farm, just execute teardown.py
 
-   ./teardown.py
+        ./teardown.py
 
 7. Finally, you can clean up all applications and environments created by these scripts.
 
-   ./cleanup.py
-
-10. Clean-up your ComodIT organization by executing *cleanup.py*.
+        ./cleanup.py
 
 ## Rendering a scene on the render farm
 
