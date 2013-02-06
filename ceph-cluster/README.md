@@ -1,6 +1,6 @@
 # Auto-scaling of a Ceph cluster
 
-In this orchestration example, we deploy a [Ceph](http://ceph.com/) cluster. Ceph Ceph is a
+In this orchestration example, we deploy a [Ceph](http://ceph.com/) cluster. Ceph is a
 distributed object store and file system designed to provide excellent
 performance, reliability and scalability. The cluster is initially made of 3 hosts:
 
@@ -9,6 +9,14 @@ performance, reliability and scalability. The cluster is initially made of 3 hos
 
 When scaling up, additional OSDs or MONs are instantiated and, once they are
 available, included in the cluster.
+
+
+## Support
+
+If you run into issues using this script, or if you have more complex requirements, feel free
+to reach out to us by sending an email to *support@comodit.com*. You can also reach out
+through our other [support channels](http://www.comodit.com/resources/support.html).
+
 
 ## Pre-requisites
 
@@ -22,50 +30,52 @@ and use the CentOS 6.3 AMI from the store as distribution.
 tutorial](http://comodit.com/resources/tutorials/cli.html) for information about
 how to install it).
 
+
 ## Usage
 
 1. Rename *config.py.sample* into *config.py* and fill-in your ComodIT credentials
-and organization name as well as the platform and distribution to use. 'admin\_key'
+and organization name as well as the platform and distribution to use. `admin_key`
 may be left unchanged.
 2. Setup ComodIT by executing *setup.py*. This will create an environment for the
 cluster as well as the applications needed to deploy it.
+
+        ./setup.py
+
 3. Deploy the initial cluster by executing *deploy.py*.
-4. You can test the cluster by connecting to given public IP with SSH and
-executing the command 'ceph -s' as root. It should display the current state
-of the cluster.
-5. Add an OSD by executing *scale\_osds.py*.
-6. Re-execute 'ceph -s' on master node, you should see the new OSD.
-5. Add a MON by executing *scale\_mons.py*.
-6. Re-execute 'ceph -s' on master node, you should see the new monitor (this can
-take some time).
-7. Remove an OSD by executing *downscale_osds.py*.
-8. Re-execute 'ceph -s' on master node, you should that latest OSD is gone (not
-"in" the cluster anymore).
-9. Tear down your cluster by executing *teardown.py* (all hosts created by *deploy.py*
-and *scale\_\*.py* are deleted).
-10. Clean-up your ComodIT organization by executing *cleanup.py*.
 
-## Files
+        ./deploy.py
 
-Here are the main files (i.e. the ones that can be executed) of this example:
+5. If you want to add an OSD to the cluster, execute *scale\_osds.py*.
 
-- *setup.py*: setups ComodIT by creating/importing all required entities.
-- *deploy.py*: creates initial cluster with its 3 hosts.
-- *scale\_osds.py*: scales cluster up by instantiating a given number of OSDs
-(1 by default).
-- *scale\_mons.py*: scales cluster up by instantiating a given number of MONs
-(1 by default).
-- *downscale\_osds.py*: scales cluster down by removing a given number of OSDs
-(1 by default).
-- *downscale\_mons.py*: scales cluster down by removing a given number of MONs
-(1 by default).
-- *teardown.py*: clears the cluster.
-- *cleanup.py*: removes entities created by *setup.py*.
+        ./scale_osds.py -c 1
 
-The other files and directory have the following role:
+    where `-c` option is the number of OSDs to add.
 
-- *config.py.sample*: contains some configuration variables, in particular the
-credentials to connect to ComodIT; must be updated and renamed into *config.py*.
-- *helper.py*: defines some helpers.
-- *config*, *mds*, *mon*, *osd*: directories containing the recipes of the
-applications used to create the Ceph cluster.
+5. If you want to add a monitor to the cluster, execute *scale\_mons.py*.
+
+        ./scale_mons.py -c 1
+
+    where `-c` option is the number of monitors to add.
+
+7. If you want to remove an OSD from the cluster, execute *downscale_osds.py*.
+
+        ./downscale_osds.py -c 1
+
+    where `-c` option is the number of OSDs to remove.
+
+7. If you want to remove a monitor from the cluster, execute *downscale_mons.py*.
+
+        ./downscale_mons.py -c 1
+
+    where `-c` option is the number of monitors to remove.
+
+9. If you want to tear down (i.e. delete all hosts created by *deploy.py*
+and *scale\_\*.py*) the cluster, execute *teardown.py*.
+
+        ./teardown.py
+
+10. Finally, you can clean up all applications and environments created by these
+scripts.
+
+        ./cleanup.py
+
