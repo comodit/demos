@@ -53,8 +53,8 @@
         {
             "do": [
                 {
-                    "action": "update", 
-                    "resource": "file://on_status_change.sh"
+                    "action": "execute", 
+                    "resource": "file://install.sh"
                 }, 
                 {
                     "action": "execute", 
@@ -62,7 +62,7 @@
                 }
             ], 
             "on": [
-                "status"
+                "_install"
             ]
         }, 
         {
@@ -79,8 +79,8 @@
         {
             "do": [
                 {
-                    "action": "execute", 
-                    "resource": "file://install.sh"
+                    "action": "update", 
+                    "resource": "file://on_status_change.sh"
                 }, 
                 {
                     "action": "execute", 
@@ -88,7 +88,7 @@
                 }
             ], 
             "on": [
-                "_install"
+                "status"
             ]
         }
     ], 
@@ -108,7 +108,17 @@
                 "type": "string"
             }, 
             "value": "in", 
-            "version": 2
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "osd_hostname", 
+            "name": "OSD Hostname", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "localhost", 
+            "version": 1
         }, 
         {
             "description": "", 
@@ -126,6 +136,6 @@
     "services": [], 
     "url": "", 
     "users": [], 
-    "uuid": "8D84E6E06EA611E2B81A69E4AC1F0212", 
-    "version": 10
+    "uuid": "31969E6074EA11E2ABBC79F7AC1F0212", 
+    "version": 7
 }

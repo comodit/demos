@@ -56,10 +56,12 @@ def scale_osds(count):
     time.sleep(3)
 
     print "Installing OSD(s)..."
+    i = 0
     next_id = latest_id + 1
     for h in osd_hosts:
-        h.install("Ceph Object Store", {"osd_id": str(next_id)})
+        h.install("Ceph Object Store", {"osd_id": str(next_id), "osd_hostname": osd_names[i]})
         next_id += 1
+        i += 1
         time.sleep(3)
 
     for h in osd_hosts:

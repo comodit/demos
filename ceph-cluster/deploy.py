@@ -132,7 +132,7 @@ def deploy():
 
     print "Installing OSD(s)..."
     for i in xrange(0, len(osd_hosts)):
-        osd_hosts[i].install("Ceph Object Store", {"osd_id": str(i)})
+        osd_hosts[i].install("Ceph Object Store", {"osd_id": str(i), "osd_hostname": osd_names[i]})
         time.sleep(3)
 
     for h in osd_hosts:
