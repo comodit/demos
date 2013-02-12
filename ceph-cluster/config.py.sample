@@ -16,6 +16,6 @@ platform = {"name" : "EC2",
                          }
             }
 
-centos = {"name" : "CentOS 6.3 (AMI)",
+distribution = {"name" : "CentOS 6.3 (AMI)",
           "settings" : {}
           }
