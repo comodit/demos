@@ -71,6 +71,11 @@ def scale_mons(count):
     total_time = time.time() - start_time
     print "Up-scaling time: " + str(total_time)
 
+    if (latest_id + count + 1) % 2 == 0:
+        print
+        print "WARNING: you do not have an odd number of monitors (-> potential quorum problems)"
+        print
+
 
 if __name__ == '__main__':
     parser = OptionParser()
