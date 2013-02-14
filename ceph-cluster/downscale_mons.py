@@ -59,7 +59,7 @@ def downscale_osds(count):
 
 if __name__ == '__main__':
     parser = OptionParser()
-    parser.add_option("-c", "--count", dest = "count", help = "the number of monitors to remove", default = 1)
+    parser.add_option("-c", "--count", dest = "count", type = "int", help = "the number of monitors to remove", default = 1)
     (options, args) = parser.parse_args()
 
     try:
