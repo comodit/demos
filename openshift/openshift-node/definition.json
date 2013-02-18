@@ -106,6 +106,9 @@
         }, 
         {
             "name": "openshift-origin-cartridge-abstract"
+        },
+        {
+            "name": "openshift-origin-cartridge-haproxy-1.4"
         }
     ], 
     "parameters": [
