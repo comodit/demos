@@ -90,6 +90,9 @@
             "name": "openshift-origin-node-util"
         }, 
         {
+            "name": "openshift-origin-node-proxy"
+        },
+        {
             "name": "openshift-origin-cartridge-php-5.4"
         }, 
         {
@@ -159,6 +162,11 @@
             "components": [], 
             "location": "https://mirror.openshift.com/pub/openshift-origin/nightly/fedora-18/latest/x86_64/", 
             "name": "openshift-origin-nightly"
+        },
+        {
+            "components": [], 
+            "location": "https://mirror.openshift.com/pub/origin-server/fedora-18/x86_64/", 
+            "name": "openshift-origin-deps"
         }
     ], 
     "services": [
@@ -173,6 +181,10 @@
         {
             "enabled": true, 
             "name": "openshift-gears"
+        },
+        {
+            "enabled": true,
+            "name": "openshift-node-web-proxy"
         }
     ], 
     "url": "", 
