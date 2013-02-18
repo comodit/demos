@@ -21,7 +21,7 @@ for hosting and executing the end-user applications.
 Deploying a high-availability cluster would require to decouple the various components of the broker. This can easily be done
 while re-using most of the recipes from this orchestration scenarion.
 
-![Deployed topology](http://comodit.com//static/images/posts/openshift-topology.jpg)
+[![Deployed topology](http://comodit.com/static/images/posts/openshift-topology.jpg)](http://comodit.com)
 
 ## Requirements
 
