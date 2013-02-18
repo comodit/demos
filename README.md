@@ -7,3 +7,4 @@ README):
 - [web-cluster](https://github.com/comodit/demos/tree/master/web-cluster): auto-scaling of a web cluster.
 - [ceph-cluster](https://github.com/comodit/demos/tree/master/ceph-cluster): auto-scaling of a Ceph cluster.
 - [render-farm](https://github.com/comodit/demos/tree/master/render-farm): deploy and scale a Blender 3D rendering farm.
+- [openshift](https://github.com/comodit/demos/tree/master/openshift): deploy and scale a Openshift Origin PaaS
