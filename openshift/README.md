@@ -1,14 +1,10 @@
 # Deploy and scale Openshift Origin
 
 In this orchestration example, we explain how to deploy and scale an [Openshift Origin](https://openshift.redhat.com/community/open-source) cluster,
-using ComodIT's orchestration possibilities.
-
-We successfully tested the deployment of Openshift on Amazon EC2 and Openstack, however it should be possible to
+using ComodIT's orchestration possibilities. We successfully tested the deployment of Openshift on Amazon EC2 and Openstack, however it should be possible to
 use any platform supported by ComodIT (Eucalyptus, Rackspace, etc.) or even deploy the cluster on a bare-metal infrastructure.
 
-These scripts target a Fedora 18 distributions.
-
-These scripts are simplified for educational purposes. Deploying and automaticalt scaling a high-availability openshift cluster would
+These scripts target a Fedora 18 distributions. They are simplified for educational purposes. Deploying and automaticalt scaling a high-availability openshift cluster would
 require more work. If you are interested by such a use case, we'd be happy to help out. Contact us at support@comodit.com and let's discuss about it.
 
 ## Deployment topology
