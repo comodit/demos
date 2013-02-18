@@ -56,13 +56,10 @@
             "name": "rubygem-parseconfig"
         }, 
         {
-            "name": "gem"
+            "name": "rubygems"
         }, 
         {
             "name": "rubygem-archive-tar-minitar"
-        }, 
-        {
-            "name": "rubygem-httpclient"
         }
     ], 
     "parameters": [], 
