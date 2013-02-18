@@ -1,0 +1,21 @@
+endpoint = "https://my.comodit.com/api"
+username = "<user>"
+password = "<password>"
+organization = "My organization"
+
+domain = "example.com"
+
+time_out = 60 * 30  # seconds
+
+platform = {"name" : "EC2",
+            "settings" : {
+                     "ec2.instanceType": "t1.micro",
+                     "ec2.securityGroups": "default",
+                     "ec2.zone": "eu-west-1a",
+                     "ec2.keyPair": "<Key name>"
+                         }
+            }
+
+distribution = {"name" : "Fedora 18 (AMI)",
+          "settings" : {}
+          }

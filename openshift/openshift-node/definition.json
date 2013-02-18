@@ -1,0 +1,179 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "node.conf", 
+            "owner": "root", 
+            "path": "/etc/openshift/node.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "node.conf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "systemd.patch", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/openshift-node/systemd.patch", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "systemd.patch"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "install.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/openshift-node/install.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "install.sh"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://node.conf"
+                }
+            ], 
+            "on": [
+                "broker_host", 
+                "public_hostname", 
+                "public_ip", 
+                "domain"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://install.sh"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://openshift-cgroups"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }
+    ], 
+    "name": "openshift-node", 
+    "organization": "Eschnou", 
+    "packages": [
+        {
+            "name": "openshift-origin-msg-node-mcollective"
+        }, 
+        {
+            "name": "openshift-origin-node-util"
+        }, 
+        {
+            "name": "openshift-origin-cartridge-php-5.4"
+        }, 
+        {
+            "name": "openshift-origin-cartridge-cron-1.4"
+        }, 
+        {
+            "name": "rubygem-openshift-origin-node"
+        }, 
+        {
+            "name": "openshift-origin-cartridge-mysql-5.1"
+        }, 
+        {
+            "name": "patch"
+        }, 
+        {
+            "name": "openshift-origin-cartridge-abstract"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "", 
+            "key": "broker_host", 
+            "name": "Broker Host", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "localhost", 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "domain", 
+            "name": "Cloud Domain", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "example.com", 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "public_ip", 
+            "name": "Node Public IP", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "127.0.0.1", 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "public_hostname", 
+            "name": "Node Public Hostname", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "please.set.node.public-hostname.fqdn", 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [
+        {
+            "components": [], 
+            "location": "https://mirror.openshift.com/pub/openshift-origin/nightly/fedora-18/latest/x86_64/", 
+            "name": "openshift-origin-nightly"
+        }
+    ], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "openshift-cgroups"
+        }, 
+        {
+            "enabled": true, 
+            "name": "cgred"
+        }, 
+        {
+            "enabled": true, 
+            "name": "openshift-gears"
+        }
+    ], 
+    "url": "", 
+    "users": [], 
+    "uuid": "F5A9C6C076EC11E29C62436EAC1F0212", 
+    "version": 43
+}

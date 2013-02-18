@@ -1,0 +1,297 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "The Openshift broker application.", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "setup.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/openshift-broker/setup.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "##", 
+                    "start": "##"
+                }, 
+                "name": "setup.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "http-openshift-origin-auth-remote-user.conf", 
+            "owner": "root", 
+            "path": "/var/www/openshift/broker/httpd/conf.d/openshift-origin-auth-remote-user.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "http-openshift-origin-auth-remote-user.conf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "openshift-origin-msg-broker-mcollective.conf", 
+            "owner": "root", 
+            "path": "/etc/openshift/plugins.d/openshift-origin-msg-broker-mcollective.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "openshift-origin-msg-broker-mcollective.conf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "gemfile.patch", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/openshift-broker/gemfile.patch", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "gemfile.patch"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "openshift-origin-auth-remote-user.conf", 
+            "owner": "root", 
+            "path": "/etc/openshift/plugins.d/openshift-origin-auth-remote-user.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "openshift-origin-auth-remote-user.conf"
+            }
+        }, 
+        {
+            "group": "apache", 
+            "mode": "644", 
+            "name": "openshift.conf", 
+            "owner": "apache", 
+            "path": "/etc/openshift/broker.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "openshift.conf"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://openshift.conf"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://openshift-broker"
+                }
+            ], 
+            "on": [
+                "mongo_host", 
+                "mongo_port", 
+                "domain", 
+                "mongo_password", 
+                "mongo_user", 
+                "mongo_database"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://setup.sh"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://openshift-broker"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }
+    ], 
+    "name": "openshift-broker", 
+    "organization": "Eschnou", 
+    "packages": [
+        {
+            "name": "openshift-origin-broker"
+        }, 
+        {
+            "name": "ntp"
+        }, 
+        {
+            "name": "rubygem-openshift-origin-auth-remote-user"
+        }, 
+        {
+            "name": "httpd"
+        }, 
+        {
+            "name": "rubygem-openshift-origin-msg-broker-mcollective"
+        }, 
+        {
+            "name": "rubygem-regin"
+        }, 
+        {
+            "name": "openshift-origin-broker-util"
+        }, 
+        {
+            "name": "rubygem-openshift-origin-dns-bind"
+        }, 
+        {
+            "name": "patch"
+        }, 
+        {
+            "name": "rubygem-mongo"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "", 
+            "key": "mongo_port", 
+            "name": "MongoDB Port", 
+            "schema": {
+                "advanced": true, 
+                "type": "number"
+            }, 
+            "value": 27017, 
+            "version": 1
+        }, 
+        {
+            "description": "The Openshift broker domain", 
+            "key": "domain", 
+            "name": "Broker Domain", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "example.com", 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "mongo_host", 
+            "name": "MongoDB Hostname", 
+            "schema": {
+                "advanced": true, 
+                "type": "string"
+            }, 
+            "value": "localhost", 
+            "version": 1
+        }, 
+        {
+            "description": "A list of users to create on install.", 
+            "key": "users", 
+            "name": "Openshift Users", 
+            "schema": {
+                "items": {
+                    "properties": {
+                        "password": {
+                            "description": "Password for this Openshift user.", 
+                            "pretty": "Password", 
+                            "required": true, 
+                            "secret": true, 
+                            "type": "string"
+                        }, 
+                        "username": {
+                            "description": "Openshift user username", 
+                            "pretty": "Username", 
+                            "required": true, 
+                            "type": "string"
+                        }
+                    }, 
+                    "type": "object"
+                }, 
+                "type": "array"
+            }, 
+            "value": [
+                {
+                    "password": "secret", 
+                    "username": "openshift"
+                }
+            ], 
+            "version": 1
+        }, 
+        {
+            "description": "Username to access mongodb database.", 
+            "key": "mongo_user", 
+            "name": "MongoDB Username", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "openshift", 
+            "version": 1
+        }, 
+        {
+            "description": "MongoDB database to connect to.", 
+            "key": "mongo_database", 
+            "name": "MongoDB Database", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "openshift_broker_dev", 
+            "version": 1
+        }, 
+        {
+            "description": "Password to access to MongoDB Database.", 
+            "key": "mongo_password", 
+            "name": "MongoDB Password", 
+            "schema": {
+                "password": true, 
+                "type": "string"
+            }, 
+            "value": "mooo", 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [
+        {
+            "components": [], 
+            "location": "https://mirror.openshift.com/pub/openshift-origin/nightly/fedora-18/latest/x86_64/", 
+            "name": "openshift-origin-nightly"
+        }
+    ], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "openshift-broker"
+        }, 
+        {
+            "enabled": true, 
+            "name": "httpd"
+        }, 
+        {
+            "enabled": true, 
+            "name": "ntpd"
+        }, 
+        {
+            "enabled": true, 
+            "name": "sshd"
+        }, 
+        {
+            "enabled": true, 
+            "name": "network"
+        }
+    ], 
+    "url": "", 
+    "users": [], 
+    "uuid": "C452DE107A0011E2994E0936AC1F0212", 
+    "version": 15
+}

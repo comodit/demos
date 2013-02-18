@@ -1,0 +1,186 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "A secure dns server setup.", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "setup.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/bind-server/setup.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "setup.sh"
+            }
+        }, 
+        {
+            "group": "named", 
+            "mode": "644", 
+            "name": "named.conf", 
+            "owner": "root", 
+            "path": "/etc/named.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "named.conf"
+            }
+        }, 
+        {
+            "group": "named", 
+            "mode": "755", 
+            "name": "forwarders", 
+            "owner": "named", 
+            "path": "/var/named/forwarders.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "forwarders"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "nsupdate.conf", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/bind-server/nsupdate.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "nsupdate.conf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "configure.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/bind-server/configure.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "configure.sh"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://nsupdate.conf"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://configure.sh"
+                }
+            ], 
+            "on": [
+                "dns_records"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://setup.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://configure.sh"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }
+    ], 
+    "name": "openshift-bind-server", 
+    "organization": "Eschnou", 
+    "packages": [
+        {
+            "name": "bind"
+        }, 
+        {
+            "name": "bind-utils"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "A list of dns records to configure on this server.", 
+            "key": "dns_records", 
+            "name": "DNS Records", 
+            "schema": {
+                "items": {
+                    "properties": {
+                        "host": {
+                            "description": "Hostname", 
+                            "pretty": "Hostname", 
+                            "required": true, 
+                            "type": "string"
+                        }, 
+                        "target": {
+                            "description": "The record target.", 
+                            "pretty": "Target", 
+                            "required": true, 
+                            "type": "string"
+                        }, 
+                        "ttl": {
+                            "default": "180", 
+                            "description": "The record time to live in seconds.", 
+                            "pretty": "TTL", 
+                            "required": true, 
+                            "type": "string"
+                        }, 
+                        "type": {
+                            "default": "A", 
+                            "description": "Record type", 
+                            "pretty": "Type", 
+                            "required": true, 
+                            "type": "string"
+                        }
+                    }, 
+                    "type": "object"
+                }, 
+                "type": "array"
+            }, 
+            "version": 2
+        }, 
+        {
+            "description": "The root dns domain for this dns server.", 
+            "key": "domain", 
+            "name": "Domain", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "example.com", 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "named"
+        }
+    ], 
+    "url": "", 
+    "users": [], 
+    "uuid": "C94395E0743311E291C8CA0FAC1F0212", 
+    "version": 43
+}

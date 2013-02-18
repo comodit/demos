@@ -1,0 +1,71 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "Setups a rabbitmq server to be used by mcollective with the stomp plugin.", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "rabbitmq.conf", 
+            "owner": "root", 
+            "path": "/etc/rabbitmq/rabbitmq-env.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "rabbitmq.conf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "install.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/rabbitmq-server/install.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "install.sh"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://install.sh"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }
+    ], 
+    "name": "openshift-rabbitmq-server", 
+    "organization": "Eschnou", 
+    "packages": [
+        {
+            "name": "rabbitmq-server"
+        }
+    ], 
+    "parameters": [], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "rabbitmq-server"
+        }
+    ], 
+    "url": "", 
+    "users": [], 
+    "uuid": "3FF7EDF0768F11E29C62436EAC1F0212", 
+    "version": 17
+}

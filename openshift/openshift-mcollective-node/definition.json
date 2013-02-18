@@ -1,0 +1,111 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "Setup the mcollective client on a host, with the stomp connector. ", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "server.cfg", 
+            "owner": "root", 
+            "path": "/etc/mcollective/server.cfg", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "server.cfg"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://server.cfg"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://mcollective"
+                }
+            ], 
+            "on": [
+                "mcollective_stomp_host", 
+                "mcollective_stomp_password", 
+                "mcollective_stomp_username", 
+                "mcollective_loglevel"
+            ]
+        }
+    ], 
+    "name": "openshift-mcollective-node", 
+    "organization": "Eschnou", 
+    "packages": [
+        {
+            "name": "mcollective"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "", 
+            "key": "mcollective_loglevel", 
+            "name": "Loglevel", 
+            "schema": {
+                "advanced": true, 
+                "enum": [
+                    "debug", 
+                    "info", 
+                    "warn"
+                ], 
+                "type": "string"
+            }, 
+            "value": "debug", 
+            "version": 1
+        }, 
+        {
+            "description": "Password of the mcollective user account on the message broker.", 
+            "key": "mcollective_stomp_password", 
+            "name": "Stomp Password", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "guest", 
+            "version": 1
+        }, 
+        {
+            "description": "Username on the message broker for this mcollective client.", 
+            "key": "mcollective_stomp_username", 
+            "name": "Stomp Username", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "guest", 
+            "version": 1
+        }, 
+        {
+            "description": "The message broker host to be used by this client.", 
+            "key": "mcollective_stomp_host", 
+            "name": "Stomp Host", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "localhost", 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "mcollective"
+        }
+    ], 
+    "url": "", 
+    "users": [], 
+    "uuid": "69DC311076E611E29C62436EAC1F0212", 
+    "version": 12
+}

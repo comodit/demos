@@ -1,0 +1,212 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "A scalable, high-performance, open source NoSQL database.", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "mongod.conf", 
+            "owner": "root", 
+            "path": "/etc/mongod.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "mongod.conf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "configure.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/mongodb/configure.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "configure.sh"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://configure.sh"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://mongod.conf"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://mongod"
+                }
+            ], 
+            "on": [
+                "port", 
+                "arch", 
+                "http_interface", 
+                "secure", 
+                "cpu_utilization", 
+                "smallfiles"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://configure.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://configure.sh"
+                }
+            ], 
+            "on": [
+                "users"
+            ]
+        }
+    ], 
+    "license": "Copyright (c) 2012 ComodIT\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.", 
+    "name": "openshift-mongodb", 
+    "organization": "Eschnou", 
+    "packages": [
+        {
+            "name": "mongodb-server"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "Set to true to modify MongoDB to use a smaller default data file size. Specifically, smallfiles reduces the initial size for data files and limits them to 512 megabytes. The smallfiles setting also reduces the size of each journal files from 1 gigabyte to 128 megabytes.", 
+            "key": "smallfiles", 
+            "name": "Use Small Files", 
+            "schema": {
+                "advanced": true, 
+                "default": false, 
+                "type": "boolean"
+            }, 
+            "value": false, 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "port", 
+            "name": "Port", 
+            "schema": {
+                "type": "integer"
+            }, 
+            "value": 27017, 
+            "version": 2
+        }, 
+        {
+            "description": "Enable the HTTP interface.", 
+            "key": "http_interface", 
+            "name": "HTTP interface", 
+            "schema": {
+                "advanced": true, 
+                "type": "boolean"
+            }, 
+            "value": true, 
+            "version": 2
+        }, 
+        {
+            "description": "Enables periodic logging of CPU utilization and I/O wait.", 
+            "key": "cpu_utilization", 
+            "name": "CPU utilization", 
+            "schema": {
+                "advanced": true, 
+                "type": "boolean"
+            }, 
+            "value": true, 
+            "version": 2
+        }, 
+        {
+            "description": "", 
+            "key": "secure", 
+            "name": "Enable Authentication", 
+            "schema": {
+                "advanced": true, 
+                "default": false, 
+                "type": "boolean"
+            }, 
+            "value": false, 
+            "version": 1
+        }, 
+        {
+            "description": "The architecture.", 
+            "key": "arch", 
+            "name": "Architecture", 
+            "schema": {
+                "advanced": true, 
+                "enum": [
+                    "i686", 
+                    "x86_64"
+                ], 
+                "type": "string"
+            }, 
+            "value": "x86_64", 
+            "version": 2
+        }, 
+        {
+            "description": "A list of database users to create.", 
+            "key": "users", 
+            "name": "Database users", 
+            "schema": {
+                "items": {
+                    "properties": {
+                        "database": {
+                            "description": "Database", 
+                            "pretty": "Database", 
+                            "required": true, 
+                            "type": "string"
+                        }, 
+                        "password": {
+                            "description": "Password for this new MongoDB user.", 
+                            "pretty": "Password", 
+                            "required": true, 
+                            "secret": true, 
+                            "type": "string"
+                        }, 
+                        "username": {
+                            "description": "MongoDB username", 
+                            "pretty": "Username", 
+                            "required": true, 
+                            "type": "string"
+                        }
+                    }, 
+                    "type": "object"
+                }, 
+                "type": "array"
+            }, 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "mongod"
+        }
+    ], 
+    "url": "http://mongodb.org", 
+    "users": [], 
+    "uuid": "7DC61010748911E291C8CA0FAC1F0212", 
+    "version": 13
+}

@@ -1,0 +1,156 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "Configure the DNS on a server.", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "resolv.conf", 
+            "owner": "root", 
+            "path": "/etc/resolv.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "resolv.conf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "dhclient.conf", 
+            "owner": "root", 
+            "path": "/etc/dhcp/dhclient-eth0.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "dhclient.conf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "configure.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/dns-configuration/configure.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "configure.sh"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "network", 
+            "owner": "root", 
+            "path": "/etc/sysconfig/network", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "network"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://configure.sh"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://resolv.conf"
+                }
+            ], 
+            "on": [
+                "nameserver"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://network"
+                }, 
+                {
+                    "action": "update", 
+                    "resource": "file://dhclient.conf"
+                }, 
+                {
+                    "action": "update", 
+                    "resource": "file://configure.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://configure.sh"
+                }
+            ], 
+            "on": [
+                "domain", 
+                "hostname"
+            ]
+        }
+    ], 
+    "name": "openshift-dhcp-dns-config", 
+    "organization": "Eschnou", 
+    "packages": [], 
+    "parameters": [
+        {
+            "description": "IP Address of the name server to be used by this host.", 
+            "key": "nameserver", 
+            "name": "Nameserver", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "10.0.0.1", 
+            "version": 1
+        }, 
+        {
+            "description": "The domain portion of the fqdn.", 
+            "key": "domain", 
+            "name": "Domain", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "localdomain", 
+            "version": 1
+        }, 
+        {
+            "description": "The host portion of the fqdn", 
+            "key": "hostname", 
+            "name": "Hostname", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "localhost", 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [], 
+    "url": "", 
+    "users": [], 
+    "uuid": "B5677080743511E291C8CA0FAC1F0212", 
+    "version": 29
+}

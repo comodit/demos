@@ -1,0 +1,129 @@
+<#noparse>
+From b374eb2dba8d3ce61f2c17900d8bd5c9cd8a0e68 Mon Sep 17 00:00:00 2001
+From: Mark Lamourine <mlamouri@redhat.com>
+Date: Fri, 15 Feb 2013 10:31:04 -0500
+Subject: [PATCH] add check for systemd based os
+
+check for systemd in status() too
+---
+ node/misc/bin/oo-admin-ctl-cgroups |   76 ++++++++++++++++++++++--------------
+ 1 file changed, 46 insertions(+), 30 deletions(-)
+
+diff --git a/node/misc/bin/oo-admin-ctl-cgroups b/node/misc/bin/oo-admin-ctl-cgroups
+index b134b48..876e9b4 100755
+--- a/node/misc/bin/oo-admin-ctl-cgroups
++++ b/node/misc/bin/oo-admin-ctl-cgroups
+@@ -16,6 +16,11 @@ fi
+ RETVAL=0
+ GROUP_RETVAL=0
+ 
++# Test if this host uses systemd or init
++function is_systemd() {
++    test $(ps --noheaders -ocomm 1) = "systemd"
++}
++
+ #
+ # Set defaults if not provided
+ #
+@@ -242,31 +247,37 @@ startuser() {
+ startall() {
+     echo "Initializing Openshift guest control groups: "
+ 
+-    if !(service cgconfig status >/dev/null)
++    # Hosts running an OS based on systemd already have cgroups running
++    if ! is_systemd
+     then
+-        RETVAL=1
+-        GROUP_RETVAL=3
+-        echo "cgconfig service not running. attempting to start it"
+-        service cgconfig start
+-        return $GROUP_RETVAL
+-    fi
+ 
+-    if !(service cgconfig status >/dev/null)
+-    then
+-        RETVAL=1
+-        GROUP_RETVAL=3
+-        echo "cgconfig service not running."
++	if !(service cgconfig status >/dev/null)
++	then
++            RETVAL=1
++            GROUP_RETVAL=3
++            echo "cgconfig service not running. attempting to start it"
++            service cgconfig start
++            return $GROUP_RETVAL
++	fi
+ 
+-        return $GROUP_RETVAL
+-    fi
++	if !(service cgconfig status >/dev/null)
++	then
++            RETVAL=1
++            GROUP_RETVAL=3
++            echo "cgconfig service not running."
++	    
++            return $GROUP_RETVAL
++	fi
++
++        # don't start if not configured for openshift
++	if [ ! -d /cgroup/all ]
++	then
++            echo "cgconfig not set for Openshift: /cgconfig/all does not exist"
++            RETVAL=1
++            GROUP_RETVAL=3
++            return $GROUP_RETVAL
++	fi
+ 
+-    # don't start if not configured for openshift
+-    if [ ! -d /cgroup/all ]
+-    then
+-        echo "cgconfig not set for Openshift: /cgconfig/all does not exist"
+-        RETVAL=1
+-        GROUP_RETVAL=3
+-        return $GROUP_RETVAL
+     fi
+ 
+     # create the root of the openshift user control group
+@@ -331,13 +342,16 @@ stopuser() {
+ stopall() {
+     echo "Removing Openshift guest control groups: "
+ 
+-    if !(service cgconfig status >/dev/null)
++    if ! is_systemd
+     then
+-       RETVAL=1
+-       GROUP_RETVAL=3
+-       echo "cgconfig service not running"
++	if !(service cgconfig status >/dev/null)
++	then
++	    RETVAL=1
++	    GROUP_RETVAL=3
++	    echo "cgconfig service not running"
+ 
+-       return $GROUP_RETVAL
++	    return $GROUP_RETVAL
++	fi
+     fi
+ 
+     # This won't scale forever, but works fine in the '100 or so' range
+@@ -375,11 +389,13 @@ restartall() {
+ status() {
+     echo "Checking Openshift Services: "
+ 
+-    # don't start if not configured for openshift
+-    if [ ! -d /cgroup/all ]
++    if ! is_systemd
+     then
+-        echo "Openshift cgroups not configured: /cgconfig/all does not exist"
+-        return 1
++	if ! [ -d /cgroup/all ]
++        then
++	    echo "Openshift cgroups not configured: /cgconfig/all does not exist"
++            return 1
++        fi
+     fi
+ 
+     lscgroup | grep -e  ":${OPENSHIFT_CGROUP_ROOT}\$" >/dev/null 2>&1
+-- 
+1.7.10
+</#noparse>

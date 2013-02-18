@@ -1,0 +1,76 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "Install rhc client from nightly repository.", 
+    "directories": [], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "install.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/openshift-client/install.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "install.sh"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [
+        {
+            "do": [
+                {
+                    "action": "execute", 
+                    "resource": "file://install.sh"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }
+    ], 
+    "name": "openshift-client", 
+    "organization": "Eschnou", 
+    "packages": [
+        {
+            "name": "rubygem-commander"
+        }, 
+        {
+            "name": "rubygem-open4"
+        }, 
+        {
+            "name": "rubygem-test-unit"
+        }, 
+        {
+            "name": "git"
+        }, 
+        {
+            "name": "rubygem-net-ssh"
+        }, 
+        {
+            "name": "rubygem-parseconfig"
+        }, 
+        {
+            "name": "gem"
+        }, 
+        {
+            "name": "rubygem-archive-tar-minitar"
+        }, 
+        {
+            "name": "rubygem-httpclient"
+        }
+    ], 
+    "parameters": [], 
+    "price": "0.00", 
+    "repositories": [], 
+    "services": [], 
+    "url": "", 
+    "users": [], 
+    "uuid": "1500EEB079CF11E2994E0936AC1F0212", 
+    "version": 17
+}

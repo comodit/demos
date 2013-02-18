@@ -1,0 +1,49 @@
+From 2ed4a5839667b64e2c94100a644de1083cc4a263 Mon Sep 17 00:00:00 2001
+From: TAKAHASHI Masaki <tarhashi@gmail.com>
+Date: Fri, 2 Nov 2012 12:25:07 +0900
+Subject: [PATCH] substitute nil to @connection after disconnect
+
+---
+ plugins/mcollective/connector/activemq.rb |    1 +
+ plugins/mcollective/connector/rabbitmq.rb |    1 +
+ plugins/mcollective/connector/stomp.rb    |    1 +
+ 3 files changed, 3 insertions(+)
+
+diff --git a/mcollective/connector/activemq.rb b/plugins/mcollective/connector/activemq.rb
+index 9e3c519..cb14647 100644
+--- a/mcollective/connector/activemq.rb
++++ b/mcollective/connector/activemq.rb
+@@ -307,6 +307,7 @@ def target_for(msg)
+       def disconnect
+         Log.debug("Disconnecting from ActiveMQ")
+         @connection.disconnect
++        @connection = nil
+       end
+ 
+       def headers_for(msg, identity=nil)
+diff --git a/mcollective/connector/rabbitmq.rb b/plugins/mcollective/connector/rabbitmq.rb
+index 6fbf300..2bb3b1c 100644
+--- a/mcollective/connector/rabbitmq.rb
++++ b/mcollective/connector/rabbitmq.rb
+@@ -260,6 +260,7 @@ def unsubscribe(agent, type, collective)
+       def disconnect
+         Log.debug("Disconnecting from RabbitMQ")
+         @connection.disconnect
++        @connection = nil
+       end
+ 
+       # looks in the environment first then in the config file
+diff --git a/plugins/mcollective/connector/stomp.rb b/plugins/mcollective/connector/stomp.rb
+index c2aefd6..4d79c11 100644
+--- a/mcollective/connector/stomp.rb
++++ b/mcollective/connector/stomp.rb
+@@ -269,6 +269,7 @@ def unsubscribe(agent, type, collective)
+       def disconnect
+         Log.debug("Disconnecting from Stomp")
+         @connection.disconnect
++        @connection = nil
+       end
+ 
+       def msgheaders
+-- 
+1.7.10
