@@ -49,11 +49,4 @@ touch /var/log/mcollective-client.log
 chown -R apache:root /var/log/openshift
 chown -R apache:root /var/log/mcollective-client.log 
 
-# Configure a first user
-<#if users??>
-  <#list users as user>
-htpasswd -bc /etc/openshift/htpasswd ##user.username## ##user.password##
-  </#list>
-</#if>
-
 ) > /var/log/comodit/openshift-broker/setup.log 2>&1

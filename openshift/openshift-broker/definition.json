@@ -77,6 +77,20 @@
         }, 
         {
             "group": "root", 
+            "mode": "755", 
+            "name": "update-users.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/openshift-broker/update-users.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "update-users.sh"
+            }
+        }, 
+        {
+            "group": "root", 
             "mode": "644", 
             "name": "rsync_id_rsa.pub", 
             "owner": "root", 
@@ -147,12 +161,31 @@
                     "resource": "file://setup.sh"
                 }, 
                 {
+                    "action": "execute", 
+                    "resource": "file://update-users.sh"
+                }, 
+                {
                     "action": "restart", 
                     "resource": "service://openshift-broker"
                 }
             ], 
             "on": [
                 "_install"
+            ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://update-users.sh"
+                }, 
+                {
+                    "action": "execute", 
+                    "resource": "file://update-users.sh"
+                }
+            ], 
+            "on": [
+                "users"
             ]
         }
     ], 
@@ -321,5 +354,5 @@
     "url": "", 
     "users": [], 
     "uuid": "80C613807A8511E2A939B55CAC1F0212", 
-    "version": 18
+    "version": 26
 }
