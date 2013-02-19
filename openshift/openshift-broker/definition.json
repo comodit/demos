@@ -76,6 +76,20 @@
             }
         }, 
         {
+            "group": "root", 
+            "mode": "644", 
+            "name": "rsync_id_rsa.pub", 
+            "owner": "root", 
+            "path": "/etc/openshift/rsync_id_rsa.pub", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "rsync_id_rsa.pub"
+            }
+        }, 
+        {
             "group": "apache", 
             "mode": "644", 
             "name": "openshift.conf", 
@@ -87,6 +101,20 @@
                     "start": "${"
                 }, 
                 "name": "openshift.conf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "600", 
+            "name": "rsync_id_rsa", 
+            "owner": "root", 
+            "path": "/etc/openshift/rsync_id_rsa", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "rsync_id_rsa"
             }
         }
     ], 
@@ -104,8 +132,8 @@
                 }
             ], 
             "on": [
-                "mongo_host", 
                 "mongo_port", 
+                "mongo_host", 
                 "domain", 
                 "mongo_password", 
                 "mongo_user", 
@@ -292,6 +320,6 @@
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "C452DE107A0011E2994E0936AC1F0212", 
-    "version": 15
+    "uuid": "80C613807A8511E2A939B55CAC1F0212", 
+    "version": 18
 }

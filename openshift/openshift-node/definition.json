@@ -8,6 +8,20 @@
         {
             "group": "root", 
             "mode": "644", 
+            "name": "web-proxy-config.json", 
+            "owner": "root", 
+            "path": "/etc/openshift/web-proxy-config.json", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "web-proxy-config.json"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "644", 
             "name": "node.conf", 
             "owner": "root", 
             "path": "/etc/openshift/node.conf", 
@@ -31,6 +45,20 @@
                     "start": "${"
                 }, 
                 "name": "systemd.patch"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "600", 
+            "name": "authorized_keys", 
+            "owner": "root", 
+            "path": "/root/.ssh/authorized_keys", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "authorized_keys"
             }
         }, 
         {
@@ -78,20 +106,36 @@
             "on": [
                 "_install"
             ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://web-proxy-config.json"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://openshift-node-web-proxy"
+                }
+            ], 
+            "on": [
+                "secure_port", 
+                "unsercure_port"
+            ]
         }
     ], 
     "name": "openshift-node", 
     "organization": "Eschnou", 
     "packages": [
         {
+            "name": "openshift-origin-node-proxy"
+        }, 
+        {
             "name": "openshift-origin-msg-node-mcollective"
         }, 
         {
             "name": "openshift-origin-node-util"
         }, 
-        {
-            "name": "openshift-origin-node-proxy"
-        },
         {
             "name": "openshift-origin-cartridge-php-5.4"
         }, 
@@ -105,13 +149,13 @@
             "name": "openshift-origin-cartridge-mysql-5.1"
         }, 
         {
+            "name": "openshift-origin-cartridge-haproxy-1.4"
+        }, 
+        {
             "name": "patch"
         }, 
         {
             "name": "openshift-origin-cartridge-abstract"
-        },
-        {
-            "name": "openshift-origin-cartridge-haproxy-1.4"
         }
     ], 
     "parameters": [
@@ -123,6 +167,16 @@
                 "type": "string"
             }, 
             "value": "localhost", 
+            "version": 1
+        }, 
+        {
+            "description": "Port for non secure http proxying", 
+            "key": "unsercure_port", 
+            "name": "Unsecure Port", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "8000", 
             "version": 1
         }, 
         {
@@ -146,6 +200,16 @@
             "version": 1
         }, 
         {
+            "description": "Port for secure http proxying", 
+            "key": "secure_port", 
+            "name": "Secure Port", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "8443", 
+            "version": 1
+        }, 
+        {
             "description": "", 
             "key": "public_hostname", 
             "name": "Node Public Hostname", 
@@ -162,7 +226,7 @@
             "components": [], 
             "location": "https://mirror.openshift.com/pub/openshift-origin/nightly/fedora-18/latest/x86_64/", 
             "name": "openshift-origin-nightly"
-        },
+        }, 
         {
             "components": [], 
             "location": "https://mirror.openshift.com/pub/origin-server/fedora-18/x86_64/", 
@@ -176,19 +240,19 @@
         }, 
         {
             "enabled": true, 
+            "name": "openshift-node-web-proxy"
+        }, 
+        {
+            "enabled": true, 
             "name": "cgred"
         }, 
         {
             "enabled": true, 
             "name": "openshift-gears"
-        },
-        {
-            "enabled": true,
-            "name": "openshift-node-web-proxy"
         }
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "F5A9C6C076EC11E29C62436EAC1F0212", 
-    "version": 43
+    "uuid": "8B9457907A8511E2A939B55CAC1F0212", 
+    "version": 20
 }

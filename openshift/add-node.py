@@ -71,7 +71,11 @@ def scale():
     print "Installing Openshift Node"
     public_ip = node.get_instance().wait_for_property('publicIp', config.time_out)
     public_hostname = node.get_instance().wait_for_address(config.time_out)
-    node.install("openshift-node", {"broker_host": "broker." + config.domain, "public_hostname": public_hostname, "public_ip": public_ip})
+    node.install("openshift-node", {"broker_host": "broker." + config.domain, 
+                                    "public_hostname": public_hostname, 
+                                    "public_ip": public_ip, 
+                                    "unsercure_port": "80" 
+                                    })
     track_changes(node)
 
     # Cleanup changes

@@ -31,8 +31,8 @@ openssl genrsa -out /etc/openshift/server_priv.pem 2048
 openssl rsa -in /etc/openshift/server_priv.pem -pubout > /etc/openshift/server_pub.pem
 
 # We also need to generate a key pair for the broker to use to move gears between nodes
-ssh-keygen -t rsa -b 2048 -f ~/.ssh/rsync_id_rsa
-cp ~/.ssh/rsync_id_rsa* /etc/openshift/
+# ssh-keygen -t rsa -b 2048 -f ~/.ssh/rsync_id_rsa
+# cp ~/.ssh/rsync_id_rsa* /etc/openshift/
 
 # Configure bundler
 cd /var/www/openshift/broker
