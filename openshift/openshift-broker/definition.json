@@ -146,8 +146,8 @@
                 }
             ], 
             "on": [
-                "mongo_port", 
                 "mongo_host", 
+                "mongo_port", 
                 "domain", 
                 "mongo_password", 
                 "mongo_user", 
@@ -353,6 +353,6 @@
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "80C613807A8511E2A939B55CAC1F0212", 
-    "version": 26
+    "uuid": "502AABE07AD611E2A939B55CAC1F0212", 
+    "version": 15
 }
