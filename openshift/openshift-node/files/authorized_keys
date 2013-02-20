@@ -1,1 +1,5 @@
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCcIjYp08dG8+xsUDgG3KetJZgPPQLGlcvGC14RujPi7ZW91RRV+fqkOAybJvCFy38X/wG0qPdGK1Qj0yvRLARIO2s25Mnysh1b4hv2kn228feQe62fAlycUlIxm8ikzGZJQB93JAqq+a/XxKdfoIfS4LTjKnmg2B73vCxHrR7X9b7vJfjrSh8Zl/3T8QYoLscbGfHa/GOYaepmNWXJ0bJdtp9dSp//azVaHkXMviVwiWwkaTXIqN1D5cDFCUtDr5h+CGGrgQUQOg4IQXYl56sScLIQMMFArEc6oZZKjSI71RPKen+G8Ei8efjuIqJTHBz9kjb9UPQciKlyVtgoShnV
+<#if keys??>
+  <#list key as key>
+${key}
+  </#list>
+</#if>

@@ -122,6 +122,17 @@
                 "secure_port", 
                 "unsercure_port"
             ]
+        }, 
+        {
+            "do": [
+                {
+                    "action": "update", 
+                    "resource": "file://authorized_keys"
+                }
+            ], 
+            "on": [
+                "keys"
+            ]
         }
     ], 
     "name": "openshift-node", 
@@ -190,6 +201,19 @@
             "version": 1
         }, 
         {
+            "description": "A list of authorized ssh keys.", 
+            "key": "keys", 
+            "name": "Authorized Keys", 
+            "schema": {
+                "items": {
+                    "type": "string"
+                }, 
+                "type": "array"
+            }, 
+            "value": [], 
+            "version": 1
+        }, 
+        {
             "description": "", 
             "key": "public_ip", 
             "name": "Node Public IP", 
@@ -253,6 +277,6 @@
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "8B9457907A8511E2A939B55CAC1F0212", 
-    "version": 20
+    "uuid": "2012AAA07B5F11E2AC8065D1AC1F0212", 
+    "version": 11
 }

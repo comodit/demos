@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import time, sys, os, helper, config
+import time, sys, os, socket, helper, config
 
 from comodit_client.api import Client
 from comodit_client.api.exceptions import PythonApiException
@@ -21,12 +21,15 @@ def scale():
     client = Client(config.endpoint, config.username, config.password)
     env = client.get_environment(config.organization, 'Openshift')
 
-    # Lookup nfs server
+    # Lookup broker server
     try:
         broker = env.get_host('Openshift Broker')
     except EntityNotFoundException:
         print "Could not find the broker"
         sys.exit(-1)
+ 
+    # Fetch broker public key
+    public_key = broker.get_instance().get_file_content("/etc/openshift/rsync_id_rsa.pub").read()
 
     # Lookup next index
     index = 0
@@ -44,7 +47,7 @@ def scale():
     print "Deploying %s" % name 
     node.provision()
 
-    # Wait and configured provisioned hosts
+    # Wait for host to be deployed and fetch machine information
     print "Waiting for host %s to be deployed" % node.name
     node.wait_for_state('READY', config.time_out)
     node_ip = node.get_instance().wait_for_property("ip.eth0", config.time_out)
@@ -70,11 +73,12 @@ def scale():
     # Install openshift-node
     print "Installing Openshift Node"
     public_ip = node.get_instance().wait_for_property('publicIp', config.time_out)
-    public_hostname = node.get_instance().wait_for_address(config.time_out)
+    public_hostname = socket.gethostbyaddr(public_ip)
     node.install("openshift-node", {"broker_host": "broker." + config.domain, 
-                                    "public_hostname": public_hostname, 
+                                    "public_hostname": public_hostname[0], 
                                     "public_ip": public_ip, 
-                                    "unsercure_port": "80" 
+                                    "unsercure_port": "80",
+                                    "keys": [public_key]
                                     })
     track_changes(node)
 
