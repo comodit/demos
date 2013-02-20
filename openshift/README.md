@@ -9,15 +9,13 @@ require more work. If you are interested by such a use case, we'd be happy to he
 
 ## Deployment topology
 
-The following diagram shows you the deployment topology we selected for these recipes. It closely matches the one described
+The deployment topology closely matches the one described
 in [this tutorial](https://openshift.redhat.com/community/wiki/build-your-own). In summary, we have a *broker* server which 
 manages everything and holds all the storage, dns, messaging components. We then have one or more *nodes* which are responsible
 for hosting and executing the end-user applications.
 
 Deploying a high-availability cluster would require to decouple the various components of the broker. This can easily be done
 while re-using most of the recipes from this orchestration scenarion.
-
-[![Deployed topology](http://comodit.com/static/images/posts/openshift-topology.jpg)](http://comodit.com)
 
 ## Requirements
 
