@@ -1,5 +1,5 @@
 <#if keys??>
-  <#list key as key>
+  <#list keys as key>
 ${key}
   </#list>
 </#if>

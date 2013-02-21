@@ -136,7 +136,7 @@
         }
     ], 
     "name": "openshift-node", 
-    "organization": "Eschnou", 
+    "organization": "Demo", 
     "packages": [
         {
             "name": "openshift-origin-node-proxy"
@@ -264,11 +264,11 @@
         }, 
         {
             "enabled": true, 
-            "name": "openshift-node-web-proxy"
+            "name": "cgred"
         }, 
         {
             "enabled": true, 
-            "name": "cgred"
+            "name": "openshift-node-web-proxy"
         }, 
         {
             "enabled": true, 
@@ -277,6 +277,6 @@
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "2012AAA07B5F11E2AC8065D1AC1F0212", 
-    "version": 11
+    "uuid": "917256C07C2511E28CE7DE837F000001", 
+    "version": 9
 }
