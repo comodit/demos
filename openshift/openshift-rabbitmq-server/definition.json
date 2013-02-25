@@ -2,7 +2,15 @@
     "canPull": false, 
     "canPush": false, 
     "description": "Setups a rabbitmq server to be used by mcollective with the stomp plugin.", 
-    "directories": [], 
+    "directories": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "ComodIT Logs", 
+            "owner": "root", 
+            "path": "/var/log/comodit/rabbitmq-server"
+        }
+    ], 
     "documentation": "", 
     "files": [
         {
@@ -66,6 +74,6 @@
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "3FF7EDF0768F11E29C62436EAC1F0212", 
-    "version": 17
+    "uuid": "7DCACD507F4511E2803151D4AC1F0212", 
+    "version": 9
 }

@@ -1,8 +1,7 @@
 #!/bin/sh
 
-mkdir -p /var/log/comodit/openshift-node/
-
 (
+set -e
 
 # Disable iptables
 /bin/systemctl stop iptables.service
@@ -26,10 +25,9 @@ perl -p -i -e "s/^#MaxStartups .*$/MaxStartups 40/" /etc/ssh/sshd_config
 echo AcceptEnv GIT_SSH >> /etc/ssh/sshd_config
 systemctl restart sshd.service
 
-# Patch to enable openshift-cgroups service to start
-/bin/patch -t -p1 /bin/oo-admin-ctl-cgroups < /var/lib/comodit/applications/openshift-node/systemd.patch
-
 # Restart mcollective server to integrate node gem
 /bin/systemctl restart mcollective.service
+
+echo -----
 
 ) > /var/log/comodit/openshift-node/install.log 2>&1

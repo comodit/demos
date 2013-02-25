@@ -61,8 +61,8 @@
             "on": [
                 "port", 
                 "arch", 
-                "http_interface", 
                 "secure", 
+                "http_interface", 
                 "cpu_utilization", 
                 "smallfiles"
             ]
@@ -112,7 +112,7 @@
                 "type": "integer"
             }, 
             "value": 27017, 
-            "version": 2
+            "version": 1
         }, 
         {
             "description": "Enable the HTTP interface.", 
@@ -123,7 +123,7 @@
                 "type": "boolean"
             }, 
             "value": true, 
-            "version": 2
+            "version": 1
         }, 
         {
             "description": "Enables periodic logging of CPU utilization and I/O wait.", 
@@ -134,7 +134,7 @@
                 "type": "boolean"
             }, 
             "value": true, 
-            "version": 2
+            "version": 1
         }, 
         {
             "description": "", 
@@ -161,7 +161,7 @@
                 "type": "string"
             }, 
             "value": "x86_64", 
-            "version": 2
+            "version": 1
         }, 
         {
             "description": "A list of database users to create.", 
@@ -207,6 +207,6 @@
     ], 
     "url": "http://mongodb.org", 
     "users": [], 
-    "uuid": "7DC61010748911E291C8CA0FAC1F0212", 
-    "version": 13
+    "uuid": "79B9D8F07F4511E2803151D4AC1F0212", 
+    "version": 6
 }

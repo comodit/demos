@@ -2,7 +2,15 @@
     "canPull": false, 
     "canPush": false, 
     "description": "Setup the mcollective client on a host, with the stomp connector. ", 
-    "directories": [], 
+    "directories": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "ComodIT Logs", 
+            "owner": "root", 
+            "path": "/var/log/comodit/mcollective-client/"
+        }
+    ], 
     "documentation": "", 
     "files": [
         {
@@ -87,7 +95,7 @@
                 "type": "string"
             }, 
             "value": "debug", 
-            "version": 2
+            "version": 1
         }, 
         {
             "description": "Password of the mcollective user account on the message broker.", 
@@ -97,7 +105,7 @@
                 "type": "string"
             }, 
             "value": "guest", 
-            "version": 3
+            "version": 1
         }, 
         {
             "description": "Username on the message broker for this mcollective client.", 
@@ -107,7 +115,7 @@
                 "type": "string"
             }, 
             "value": "guest", 
-            "version": 3
+            "version": 1
         }, 
         {
             "description": "The message broker host to be used by this client.", 
@@ -117,7 +125,7 @@
                 "type": "string"
             }, 
             "value": "localhost", 
-            "version": 2
+            "version": 1
         }
     ], 
     "price": "0.00", 
@@ -125,6 +133,6 @@
     "services": [], 
     "url": "", 
     "users": [], 
-    "uuid": "37538C20748911E291C8CA0FAC1F0212", 
-    "version": 48
+    "uuid": "76D752707F4511E2803151D4AC1F0212", 
+    "version": 10
 }

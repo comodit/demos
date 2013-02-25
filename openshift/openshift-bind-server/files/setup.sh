@@ -1,8 +1,9 @@
 #!/bin/sh
 
-mkdir -p /var/log/comodit/openshift-bind-server
-
 (
+# Exit on errors
+set -e
+
 # We will be referring frequently to the domain name with which we are configuring 
 # this OpenShift installation, so let us set the $domain environment variable for 
 # easy reference
@@ -74,6 +75,8 @@ restorecon /etc/named.conf
 
 # Start
 /bin/systemctl start named.service
+
+echo -----
 
 </#noparse>
 

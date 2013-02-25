@@ -2,7 +2,15 @@
     "canPull": false, 
     "canPush": false, 
     "description": "", 
-    "directories": [], 
+    "directories": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "ComodIT Logs", 
+            "owner": "root", 
+            "path": "/var/log/comodit/openshift-node/"
+        }
+    ], 
     "documentation": "", 
     "files": [
         {
@@ -31,20 +39,6 @@
                     "start": "${"
                 }, 
                 "name": "node.conf"
-            }
-        }, 
-        {
-            "group": "root", 
-            "mode": "644", 
-            "name": "systemd.patch", 
-            "owner": "root", 
-            "path": "/var/lib/comodit/applications/openshift-node/systemd.patch", 
-            "template": {
-                "delimiter": {
-                    "end": "}", 
-                    "start": "${"
-                }, 
-                "name": "systemd.patch"
             }
         }, 
         {
@@ -136,7 +130,7 @@
         }
     ], 
     "name": "openshift-node", 
-    "organization": "Demo", 
+    "organization": "Eschnou", 
     "packages": [
         {
             "name": "openshift-origin-node-proxy"
@@ -145,25 +139,22 @@
             "name": "openshift-origin-msg-node-mcollective"
         }, 
         {
-            "name": "openshift-origin-node-util"
+            "name": "openshift-origin-cartridge-php-5.4"
         }, 
         {
-            "name": "openshift-origin-cartridge-php-5.4"
+            "name": "openshift-origin-node-util"
         }, 
         {
             "name": "openshift-origin-cartridge-cron-1.4"
         }, 
         {
-            "name": "rubygem-openshift-origin-node"
-        }, 
-        {
             "name": "openshift-origin-cartridge-mysql-5.1"
         }, 
         {
-            "name": "openshift-origin-cartridge-haproxy-1.4"
+            "name": "rubygem-openshift-origin-node"
         }, 
         {
-            "name": "patch"
+            "name": "openshift-origin-cartridge-haproxy-1.4"
         }, 
         {
             "name": "openshift-origin-cartridge-abstract"
@@ -264,11 +255,11 @@
         }, 
         {
             "enabled": true, 
-            "name": "cgred"
+            "name": "openshift-node-web-proxy"
         }, 
         {
             "enabled": true, 
-            "name": "openshift-node-web-proxy"
+            "name": "cgred"
         }, 
         {
             "enabled": true, 
@@ -277,6 +268,6 @@
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "917256C07C2511E28CE7DE837F000001", 
-    "version": 9
+    "uuid": "7B2A31D07F4511E2803151D4AC1F0212", 
+    "version": 16
 }

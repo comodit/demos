@@ -4,36 +4,9 @@
     "description": "Install rhc client from nightly repository.", 
     "directories": [], 
     "documentation": "", 
-    "files": [
-        {
-            "group": "root", 
-            "mode": "755", 
-            "name": "install.sh", 
-            "owner": "root", 
-            "path": "/var/lib/comodit/applications/openshift-client/install.sh", 
-            "template": {
-                "delimiter": {
-                    "end": "}", 
-                    "start": "${"
-                }, 
-                "name": "install.sh"
-            }
-        }
-    ], 
+    "files": [], 
     "groups": [], 
-    "handlers": [
-        {
-            "do": [
-                {
-                    "action": "execute", 
-                    "resource": "file://install.sh"
-                }
-            ], 
-            "on": [
-                "_install"
-            ]
-        }
-    ], 
+    "handlers": [], 
     "name": "openshift-client", 
     "organization": "Eschnou", 
     "packages": [
@@ -41,10 +14,16 @@
             "name": "rubygem-commander"
         }, 
         {
+            "name": "rubygem-test-unit"
+        }, 
+        {
             "name": "rubygem-open4"
         }, 
         {
-            "name": "rubygem-test-unit"
+            "name": "rubygems"
+        }, 
+        {
+            "name": "rhc"
         }, 
         {
             "name": "git"
@@ -56,7 +35,7 @@
             "name": "rubygem-parseconfig"
         }, 
         {
-            "name": "rubygems"
+            "name": "rubygem-httpclient"
         }, 
         {
             "name": "rubygem-archive-tar-minitar"
@@ -64,10 +43,21 @@
     ], 
     "parameters": [], 
     "price": "0.00", 
-    "repositories": [], 
+    "repositories": [
+        {
+            "components": [], 
+            "location": "https://mirror.openshift.com/pub/openshift-origin/nightly/fedora-18/latest/x86_64/", 
+            "name": "openshift-origin-nightly"
+        }, 
+        {
+            "components": [], 
+            "location": "https://mirror.openshift.com/pub/origin-server/fedora-18/x86_64/", 
+            "name": "openshift-origin-deps"
+        }
+    ], 
     "services": [], 
     "url": "", 
     "users": [], 
-    "uuid": "1500EEB079CF11E2994E0936AC1F0212", 
-    "version": 17
+    "uuid": "734726D07F4511E2803151D4AC1F0212", 
+    "version": 9
 }

@@ -36,8 +36,8 @@
             "on": [
                 "mcollective_stomp_host", 
                 "mcollective_stomp_password", 
-                "mcollective_stomp_username", 
-                "mcollective_loglevel"
+                "mcollective_loglevel", 
+                "mcollective_stomp_username"
             ]
         }
     ], 
@@ -106,6 +106,6 @@
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "69DC311076E611E29C62436EAC1F0212", 
-    "version": 12
+    "uuid": "78A8B7107F4511E2803151D4AC1F0212", 
+    "version": 3
 }

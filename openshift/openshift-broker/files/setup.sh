@@ -1,8 +1,8 @@
 #!/bin/sh
 
-mkdir -p /var/log/comodit/openshift-broker
-
 (
+# Exit on errors
+set -e
 
 # Disable iptables
 /bin/systemctl stop iptables.service
@@ -10,10 +10,6 @@ mkdir -p /var/log/comodit/openshift-broker
 
 # Disable SELinux
 /sbin/setenforce 0
-
-# The default value of ServerName is localhost and should be changed 
-# to accurately reflect your broker hostname.
-sed -i -e "s/ServerName .*$/ServerName `hostname`/" /etc/httpd/conf.d/000000_openshift_origin_broker_proxy.conf
 
 # Configure bind plugin
 KEY="$(grep Key: /var/named/K${domain}*.private | cut -d ' ' -f 2)"
@@ -36,7 +32,13 @@ cp ~/.ssh/rsync_id_rsa* /etc/openshift/
 
 # Configure bundler
 cd /var/www/openshift/broker
-patch Gemfile < /var/lib/comodit/applications/openshift-broker/gemfile.patch
+sed -i "s/, '0.12.1'//" Gemfile
+sed -i "s/, '1.6.1'//" Gemfile
+sed -i "s/, '<= 0.9.2.2'//" Gemfile
+sed -i "s/, '3.2.0'//" Gemfile
+sed -i "s/, '0.5.2'//" Gemfile
+
+# Install missing gems
 gem install mongoid
 gem install open4
 gem install simplecov
@@ -48,5 +50,7 @@ bundle --local
 touch /var/log/mcollective-client.log
 chown -R apache:root /var/log/openshift
 chown -R apache:root /var/log/mcollective-client.log 
+
+echo ------
 
 ) > /var/log/comodit/openshift-broker/setup.log 2>&1

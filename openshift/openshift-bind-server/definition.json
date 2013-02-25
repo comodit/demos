@@ -2,7 +2,15 @@
     "canPull": false, 
     "canPush": false, 
     "description": "A secure dns server setup.", 
-    "directories": [], 
+    "directories": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "ComodIT logs", 
+            "owner": "root", 
+            "path": "/var/log/comodit/openshift-bind-server/"
+        }
+    ], 
     "documentation": "", 
     "files": [
         {
@@ -158,7 +166,7 @@
                 }, 
                 "type": "array"
             }, 
-            "version": 2
+            "version": 1
         }, 
         {
             "description": "The root dns domain for this dns server.", 
@@ -181,6 +189,6 @@
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "C94395E0743311E291C8CA0FAC1F0212", 
-    "version": 43
+    "uuid": "6CC6E0207F4511E2803151D4AC1F0212", 
+    "version": 18
 }

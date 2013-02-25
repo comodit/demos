@@ -2,7 +2,15 @@
     "canPull": false, 
     "canPush": false, 
     "description": "The Openshift broker application.", 
-    "directories": [], 
+    "directories": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "ComodIT Logs", 
+            "owner": "root", 
+            "path": "/var/log/comodit/openshift-broker"
+        }
+    ], 
     "documentation": "", 
     "files": [
         {
@@ -45,20 +53,6 @@
                     "start": "${"
                 }, 
                 "name": "openshift-origin-msg-broker-mcollective.conf"
-            }
-        }, 
-        {
-            "group": "root", 
-            "mode": "644", 
-            "name": "gemfile.patch", 
-            "owner": "root", 
-            "path": "/var/lib/comodit/applications/openshift-broker/gemfile.patch", 
-            "template": {
-                "delimiter": {
-                    "end": "}", 
-                    "start": "${"
-                }, 
-                "name": "gemfile.patch"
             }
         }, 
         {
@@ -118,8 +112,8 @@
                 }
             ], 
             "on": [
-                "mongo_port", 
                 "mongo_host", 
+                "mongo_port", 
                 "domain", 
                 "mongo_password", 
                 "mongo_user", 
@@ -187,9 +181,6 @@
         }, 
         {
             "name": "rubygem-openshift-origin-dns-bind"
-        }, 
-        {
-            "name": "patch"
         }, 
         {
             "name": "rubygem-mongo"
@@ -325,6 +316,6 @@
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "10DB8E307B5F11E2AC8065D1AC1F0212", 
-    "version": 15
+    "uuid": "6FAF33007F4511E2803151D4AC1F0212", 
+    "version": 24
 }
