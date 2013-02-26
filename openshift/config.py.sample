@@ -7,10 +7,10 @@ domain = "example.com"
 
 time_out = 60 * 30  # seconds
 
-platform = {"name" : "EC2",
+platform = {"name" : "Amazon EC2",
             "settings" : {
-                     "ec2.instanceType": "t1.micro",
-                     "ec2.securityGroups": "default",
+                     "ec2.instanceType": "m1.medium",
+                     "ec2.securityGroups": "openshift",
                      "ec2.zone": "eu-west-1a",
                      "ec2.keyPair": "<Key name>"
                          }
