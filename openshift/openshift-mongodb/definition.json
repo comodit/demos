@@ -8,15 +8,15 @@
         {
             "group": "root", 
             "mode": "644", 
-            "name": "mongod.conf", 
+            "name": "mongodb.conf", 
             "owner": "root", 
-            "path": "/etc/mongod.conf", 
+            "path": "/etc/mongodb.conf", 
             "template": {
                 "delimiter": {
                     "end": "}", 
                     "start": "${"
                 }, 
-                "name": "mongod.conf"
+                "name": "mongodb.conf"
             }
         }, 
         {
@@ -51,7 +51,7 @@
             "do": [
                 {
                     "action": "update", 
-                    "resource": "file://mongod.conf"
+                    "resource": "file://mongodb.conf"
                 }, 
                 {
                     "action": "restart", 
@@ -61,8 +61,8 @@
             "on": [
                 "port", 
                 "arch", 
-                "secure", 
                 "http_interface", 
+                "secure", 
                 "cpu_utilization", 
                 "smallfiles"
             ]
@@ -106,38 +106,6 @@
         }, 
         {
             "description": "", 
-            "key": "port", 
-            "name": "Port", 
-            "schema": {
-                "type": "integer"
-            }, 
-            "value": 27017, 
-            "version": 1
-        }, 
-        {
-            "description": "Enable the HTTP interface.", 
-            "key": "http_interface", 
-            "name": "HTTP interface", 
-            "schema": {
-                "advanced": true, 
-                "type": "boolean"
-            }, 
-            "value": true, 
-            "version": 1
-        }, 
-        {
-            "description": "Enables periodic logging of CPU utilization and I/O wait.", 
-            "key": "cpu_utilization", 
-            "name": "CPU utilization", 
-            "schema": {
-                "advanced": true, 
-                "type": "boolean"
-            }, 
-            "value": true, 
-            "version": 1
-        }, 
-        {
-            "description": "", 
             "key": "secure", 
             "name": "Enable Authentication", 
             "schema": {
@@ -146,21 +114,6 @@
                 "type": "boolean"
             }, 
             "value": false, 
-            "version": 1
-        }, 
-        {
-            "description": "The architecture.", 
-            "key": "arch", 
-            "name": "Architecture", 
-            "schema": {
-                "advanced": true, 
-                "enum": [
-                    "i686", 
-                    "x86_64"
-                ], 
-                "type": "string"
-            }, 
-            "value": "x86_64", 
             "version": 1
         }, 
         {
@@ -207,6 +160,6 @@
     ], 
     "url": "http://mongodb.org", 
     "users": [], 
-    "uuid": "79B9D8F07F4511E2803151D4AC1F0212", 
-    "version": 6
+    "uuid": "BCC009B0800511E2BBF9A9D2AC1F0212", 
+    "version": 10
 }
