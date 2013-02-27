@@ -158,7 +158,10 @@
         }, 
         {
             "name": "openshift-origin-cartridge-haproxy-1.4"
-        } 
+        },
+        {
+            "name": "openshift-origin-cartridge-ruby-1.9"
+        }
     ], 
     "parameters": [
         {
