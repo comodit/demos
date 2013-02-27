@@ -1,7 +1,10 @@
 # ComodIT Cloud Orchestration Demos
 
 This project is a repository of orchestration examples using ComodIT's
-Python library. Each directory contains an example (each example has its own
+Python library. For more details, please check out [http://comodit.com](http://comodit.com).
+And in case of troubles, contact us at support@comodit.com.
+
+Each directory contains an example (each example has its own
 README):
 
 - [web-cluster](https://github.com/comodit/demos/tree/master/web-cluster): auto-scaling of a web cluster.
