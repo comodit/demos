@@ -64,7 +64,6 @@ tutorial](/resources/tutorials/cli.html) for information about how to install it
             "settings" : {
                      "ec2.instanceType": "m1.large",
                      "ec2.securityGroups": "openshift",
-                     "ec2.zone": "eu-west-1a",
                      "ec2.keyPair": "eschnou"
                      }
         }
