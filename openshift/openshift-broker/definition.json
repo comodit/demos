@@ -288,7 +288,7 @@
     "repositories": [
         {
             "components": [], 
-            "location": "https://mirror.openshift.com/pub/openshift-origin/nightly/fedora-18/latest/x86_64/", 
+            "location": "https://mirror.openshift.com/pub/openshift-origin/nightly/fedora-18/2013-02-25/x86_64/", 
             "name": "openshift-origin-nightly"
         }
     ], 
