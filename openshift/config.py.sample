@@ -1,12 +1,21 @@
+# ComodIT Account details
 endpoint = "https://my.comodit.com/api"
 username = "<user>"
 password = "<password>"
 organization = "My organization"
 
+# Your openshift domain
 domain = "example.com"
 
+# Openshift Origin repository to use
+# By default, the latest tested snapshot is used, you can override it here.
+# To use the latest from nightly, use the following value.
+#repo = "https://mirror.openshift.com/pub/openshift-origin/nightly/fedora-18/latest/x86_64/"
+
+# API Timeout 
 time_out = 60 * 30  # seconds
 
+# Your target platform settings
 platform = {"name" : "Amazon EC2",
             "settings" : {
                      "ec2.instanceType": "m1.medium",
@@ -15,6 +24,7 @@ platform = {"name" : "Amazon EC2",
                          }
             }
 
+# Your target distribution settings
 distribution = {"name" : "Fedora 18 (AMI)",
           "settings" : {}
           }

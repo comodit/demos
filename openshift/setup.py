@@ -31,8 +31,22 @@ def setup():
     importer.import_application(org, 'openshift-node')
     importer.import_application(org, 'openshift-rabbitmq-server')
 
+    # Update repositories
+    if hasattr(config, "repo"):
+      updaterepo(org.get_application("openshift-broker"), config.repo)
+      updaterepo(org.get_application("openshift-node"), config.repo)
+      updaterepo(org.get_application("openshift-client"), config.repo)
+
     print "Done."
 
+
+def updaterepo(app, location):
+  for repo in app.repositories:
+    if repo.name == "openshift-origin-nightly":
+      repo.location = config.repo
+      app.update()
+      return
+    
 
 if __name__ == '__main__':
     try:
