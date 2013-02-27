@@ -133,32 +133,32 @@
     "organization": "Eschnou", 
     "packages": [
         {
+            "name": "rubygem-openshift-origin-node"
+        }, 
+        {
+            "name": "openshift-origin-node-util"
+        }, 
+        {
             "name": "openshift-origin-node-proxy"
         }, 
         {
             "name": "openshift-origin-msg-node-mcollective"
         }, 
         {
-            "name": "openshift-origin-cartridge-php-5.4"
-        }, 
-        {
-            "name": "openshift-origin-node-util"
-        }, 
+            "name": "openshift-origin-cartridge-abstract"
+        },
         {
             "name": "openshift-origin-cartridge-cron-1.4"
+        }, 
+        {
+            "name": "openshift-origin-cartridge-php-5.4"
         }, 
         {
             "name": "openshift-origin-cartridge-mysql-5.1"
         }, 
         {
-            "name": "rubygem-openshift-origin-node"
-        }, 
-        {
             "name": "openshift-origin-cartridge-haproxy-1.4"
-        }, 
-        {
-            "name": "openshift-origin-cartridge-abstract"
-        }
+        } 
     ], 
     "parameters": [
         {
@@ -255,11 +255,11 @@
         }, 
         {
             "enabled": true, 
-            "name": "openshift-node-web-proxy"
+            "name": "cgred"
         }, 
         {
             "enabled": true, 
-            "name": "cgred"
+            "name": "openshift-node-web-proxy"
         }, 
         {
             "enabled": true, 
@@ -268,6 +268,6 @@
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "7B2A31D07F4511E2803151D4AC1F0212", 
-    "version": 16
+    "uuid": "43D2F41080E911E299092573AC1F0212", 
+    "version": 22
 }
