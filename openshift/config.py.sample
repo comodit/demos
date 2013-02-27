@@ -20,7 +20,8 @@ platform = {"name" : "Amazon EC2",
             "settings" : {
                      "ec2.instanceType": "m1.medium",
                      "ec2.securityGroups": "openshift",
-                     "ec2.keyPair": "<Key name>"
+                     "ec2.keyPair": "<Key name>",
+                     "ec2.zone": "eu-west-1a"
                          }
             }
 
