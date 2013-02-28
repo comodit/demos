@@ -12,6 +12,15 @@ domain = "example.com"
 # To use the latest from nightly, use the following value.
 #repo = "https://mirror.openshift.com/pub/openshift-origin/nightly/fedora-18/latest/x86_64/"
 
+# Openshift cartridges to deploy on the node in ADDITION to the mandatory abstract, cron and haproxy cartridges.
+# Changing this requires to run a cleanup/setup
+#
+cartridges = [
+          "openshift-origin-cartridge-php-5.4",
+          "openshift-origin-cartridge-ruby-1.9",
+          "openshift-origin-cartridge-mysql-5.1"
+          ]
+
 # API Timeout 
 time_out = 60 * 30  # seconds
 

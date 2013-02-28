@@ -1,7 +1,7 @@
 {
     "canPull": false, 
     "canPush": false, 
-    "description": "", 
+    "description": "A base node deployment with no cartridges.", 
     "directories": [
         {
             "group": "root", 
@@ -75,6 +75,21 @@
         {
             "do": [
                 {
+                    "action": "execute", 
+                    "resource": "file://install.sh"
+                }, 
+                {
+                    "action": "restart", 
+                    "resource": "service://openshift-cgroups"
+                }
+            ], 
+            "on": [
+                "_install"
+            ]
+        }, 
+        {
+            "do": [
+                {
                     "action": "update", 
                     "resource": "file://node.conf"
                 }
@@ -89,16 +104,12 @@
         {
             "do": [
                 {
-                    "action": "execute", 
-                    "resource": "file://install.sh"
-                }, 
-                {
-                    "action": "restart", 
-                    "resource": "service://openshift-cgroups"
+                    "action": "update", 
+                    "resource": "file://authorized_keys"
                 }
             ], 
             "on": [
-                "_install"
+                "keys"
             ]
         }, 
         {
@@ -116,28 +127,11 @@
                 "secure_port", 
                 "unsercure_port"
             ]
-        }, 
-        {
-            "do": [
-                {
-                    "action": "update", 
-                    "resource": "file://authorized_keys"
-                }
-            ], 
-            "on": [
-                "keys"
-            ]
         }
     ], 
     "name": "openshift-node", 
     "organization": "Eschnou", 
     "packages": [
-        {
-            "name": "rubygem-openshift-origin-node"
-        }, 
-        {
-            "name": "openshift-origin-node-util"
-        }, 
         {
             "name": "openshift-origin-node-proxy"
         }, 
@@ -145,22 +139,10 @@
             "name": "openshift-origin-msg-node-mcollective"
         }, 
         {
-            "name": "openshift-origin-cartridge-abstract"
-        },
-        {
-            "name": "openshift-origin-cartridge-cron-1.4"
+            "name": "openshift-origin-node-util"
         }, 
         {
-            "name": "openshift-origin-cartridge-php-5.4"
-        }, 
-        {
-            "name": "openshift-origin-cartridge-mysql-5.1"
-        }, 
-        {
-            "name": "openshift-origin-cartridge-haproxy-1.4"
-        },
-        {
-            "name": "openshift-origin-cartridge-ruby-1.9"
+            "name": "rubygem-openshift-origin-node"
         }
     ], 
     "parameters": [
@@ -258,11 +240,11 @@
         }, 
         {
             "enabled": true, 
-            "name": "cgred"
+            "name": "openshift-node-web-proxy"
         }, 
         {
             "enabled": true, 
-            "name": "openshift-node-web-proxy"
+            "name": "cgred"
         }, 
         {
             "enabled": true, 
@@ -271,6 +253,6 @@
     ], 
     "url": "", 
     "users": [], 
-    "uuid": "43D2F41080E911E299092573AC1F0212", 
-    "version": 22
+    "uuid": "E724F130819E11E2995522A5AC1F0212", 
+    "version": 14
 }

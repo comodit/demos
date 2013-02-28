@@ -3,6 +3,7 @@
 import config 
 
 from comodit_client.api import Client
+from comodit_client.api.application import Package
 from comodit_client.api.collection import EntityNotFoundException
 from comodit_client.api.importer import Import
 
@@ -29,6 +30,7 @@ def setup():
     importer.import_application(org, 'openshift-mcollective-node')
     importer.import_application(org, 'openshift-mongodb')
     importer.import_application(org, 'openshift-node')
+    importer.import_application(org, 'openshift-cartridges')
     importer.import_application(org, 'openshift-rabbitmq-server')
 
     # Update repositories
@@ -36,6 +38,13 @@ def setup():
       updaterepo(org.get_application("openshift-broker"), config.repo)
       updaterepo(org.get_application("openshift-node"), config.repo)
       updaterepo(org.get_application("openshift-client"), config.repo)
+
+    # Append cartridges
+    if hasattr(config, "cartridges"):
+        app = org.get_application("openshift-cartridges")
+        for cart in config.cartridges:
+          app.add_package(Package({"name": cart}))
+        app.update()
 
     print "Done."
 

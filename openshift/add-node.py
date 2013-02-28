@@ -47,9 +47,13 @@ def scale():
     print "Deploying %s" % name 
     node.provision()
 
-    # Wait for host to be deployed and fetch machine information
+    # Wait for host to be deployed
     print "Waiting for host %s to be deployed" % node.name
     node.wait_for_state('READY', config.time_out)
+    if node.state == "PROVISIONING":
+      raise Exception("Timed out waiting for host to be deployed.")
+
+    # Fetch network details
     node_ip = node.get_instance().wait_for_property("ip.eth0", config.time_out)
     hostname = "node-%s" % index
 
@@ -68,6 +72,11 @@ def scale():
     node.install("openshift-mcollective-node", {"mcollective_stomp_host": "broker." + config.domain, 
                                                 "mcollective_stomp_username": "guest", 
                                                 "mcollective_stomp_password": "guest"})
+    track_changes(node)
+
+    # Install cartridges
+    print "Installing openshift-cartridges"
+    node.install("openshift-cartridges", {})
     track_changes(node)
 
     # Install openshift-node

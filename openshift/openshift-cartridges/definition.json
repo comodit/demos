@@ -1,0 +1,124 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "A group of cartridges to deploy on a node.\n", 
+    "directories": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "ComodIT Logs", 
+            "owner": "root", 
+            "path": "/var/log/comodit/openshift-cartridges/"
+        }
+    ], 
+    "documentation": "", 
+    "files": [], 
+    "groups": [], 
+    "handlers": [], 
+    "name": "openshift-cartridges", 
+    "organization": "Eschnou", 
+    "packages": [
+        {
+            "name": "openshift-origin-cartridge-cron-1.4"
+        }, 
+        {
+            "name": "openshift-origin-cartridge-haproxy-1.4"
+        }, 
+        {
+            "name": "openshift-origin-cartridge-abstract"
+        }
+    ], 
+    "parameters": [
+        {
+            "description": "", 
+            "key": "broker_host", 
+            "name": "Broker Host", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "localhost", 
+            "version": 1
+        }, 
+        {
+            "description": "Port for non secure http proxying", 
+            "key": "unsercure_port", 
+            "name": "Unsecure Port", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "8000", 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "domain", 
+            "name": "Cloud Domain", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "example.com", 
+            "version": 1
+        }, 
+        {
+            "description": "A list of authorized ssh keys.", 
+            "key": "keys", 
+            "name": "Authorized Keys", 
+            "schema": {
+                "items": {
+                    "type": "string"
+                }, 
+                "type": "array"
+            }, 
+            "value": [], 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "public_ip", 
+            "name": "Node Public IP", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "127.0.0.1", 
+            "version": 1
+        }, 
+        {
+            "description": "Port for secure http proxying", 
+            "key": "secure_port", 
+            "name": "Secure Port", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "8443", 
+            "version": 1
+        }, 
+        {
+            "description": "", 
+            "key": "public_hostname", 
+            "name": "Node Public Hostname", 
+            "schema": {
+                "type": "string"
+            }, 
+            "value": "please.set.node.public-hostname.fqdn", 
+            "version": 1
+        }
+    ], 
+    "price": "0.00", 
+    "repositories": [
+        {
+            "components": [], 
+            "location": "https://mirror.openshift.com/pub/openshift-origin/nightly/fedora-18/2013-02-25/x86_64/", 
+            "name": "openshift-origin-nightly"
+        }, 
+        {
+            "components": [], 
+            "location": "https://mirror.openshift.com/pub/origin-server/fedora-18/x86_64/", 
+            "name": "openshift-origin-deps"
+        }
+    ], 
+    "services": [], 
+    "url": "", 
+    "users": [], 
+    "uuid": "A880C350819411E2995522A5AC1F0212", 
+    "version": 22
+}

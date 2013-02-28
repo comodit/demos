@@ -23,6 +23,7 @@ def clean_up():
     org.applications().delete('openshift-mcollective-client')
     org.applications().delete('openshift-mcollective-node')
     org.applications().delete('openshift-mongodb')
+    org.applications().delete('openshift-cartridges')
     org.applications().delete('openshift-node')
     org.applications().delete('openshift-rabbitmq-server')
 

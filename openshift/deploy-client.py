@@ -37,6 +37,10 @@ def deploy():
     # Wait for host to be deployed
     print "Waiting for host %s to be deployed" % node.name
     node.wait_for_state('READY', config.time_out)
+    if node.state == "PROVISIONING":
+      raise Exception("Timed out waiting for host to be deployed.")
+
+    # Get network details
     node_ip = node.get_instance().wait_for_property("ip.eth0", config.time_out)
 
     # Add dns record for this new host

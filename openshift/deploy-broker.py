@@ -41,9 +41,13 @@ def deploy():
     if broker.state == "PROVISIONING":
       print "Waiting for Broker to be deployed"
       broker.wait_for_state('READY', config.time_out)
+      if broker.state == "PROVISIONING":
+          raise Exception("Timed out waiting for host to be provisioned.")
 
     # Get the broker IP address
     broker_ip = broker.get_instance().wait_for_property("ip.eth0", config.time_out)
+    if broker_ip is None:
+        raise Exception("Failed to retrieve the host IP")
 
     # Configure broker
     print "Installing the Bind server"
