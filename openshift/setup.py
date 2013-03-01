@@ -30,6 +30,7 @@ def setup():
     importer.import_application(org, 'openshift-mcollective-node')
     importer.import_application(org, 'openshift-mongodb')
     importer.import_application(org, 'openshift-node')
+    importer.import_application(org, 'openshift-console')
     importer.import_application(org, 'openshift-cartridges')
     importer.import_application(org, 'openshift-rabbitmq-server')
 

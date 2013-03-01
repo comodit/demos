@@ -1,0 +1,121 @@
+{
+    "canPull": false, 
+    "canPush": false, 
+    "description": "The openshift web console.", 
+    "directories": [
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "ComodIT Logs", 
+            "owner": "root", 
+            "path": "/var/log/comodit/openshift-console"
+        }, 
+        {
+            "group": "apache", 
+            "mode": "666", 
+            "name": "Missing log folder", 
+            "owner": "apache", 
+            "path": "/var/www/openshift/console/httpd/logs"
+        }
+    ], 
+    "documentation": "", 
+    "files": [
+        {
+            "group": "root", 
+            "mode": "644", 
+            "name": "openshift-origin-auth-remote-user-basic.conf", 
+            "owner": "root", 
+            "path": "/var/www/openshift/console/httpd/conf.d/openshift-origin-auth-remote-user-basic.conf", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "openshift-origin-auth-remote-user-basic.conf"
+            }
+        }, 
+        {
+            "group": "root", 
+            "mode": "755", 
+            "name": "install.sh", 
+            "owner": "root", 
+            "path": "/var/lib/comodit/applications/openshift-console/install.sh", 
+            "template": {
+                "delimiter": {
+                    "end": "}", 
+                    "start": "${"
+                }, 
+                "name": "install.sh"
+            }
+        }
+    ], 
+    "groups": [], 
+    "handlers": [], 
+    "name": "openshift-console", 
+    "organization": "Demo", 
+    "packages": [
+        {
+            "name": "rubygem-minitest"
+        }, 
+        {
+            "name": "rubygem-rails"
+        }, 
+        {
+            "name": "rubygem-sass-rails"
+        }, 
+        {
+            "name": "rubygem-jquery-rails"
+        }, 
+        {
+            "name": "rubygem-formtastic"
+        }, 
+        {
+            "name": "rubygem-rdiscount"
+        }, 
+        {
+            "name": "rubygem-therubyracer"
+        }, 
+        {
+            "name": "rubygem-net-http-persistent"
+        }, 
+        {
+            "name": "rubygem-bundler"
+        }, 
+        {
+            "name": "rubygem-coffee-rails"
+        }, 
+        {
+            "name": "rubygem-compass-rails"
+        }, 
+        {
+            "name": "rubygem-uglifier"
+        }, 
+        {
+            "name": "openshift-origin-console"
+        }
+    ], 
+    "parameters": [], 
+    "price": "0.00", 
+    "repositories": [
+        {
+            "components": [], 
+            "location": "https://mirror.openshift.com/pub/openshift-origin/nightly/fedora-18/2013-02-25/x86_64/", 
+            "name": "openshift-origin-nightly"
+        }, 
+        {
+            "components": [], 
+            "location": "https://mirror.openshift.com/pub/origin-server/fedora-18/x86_64/", 
+            "name": "openshift-origin-deps"
+        }
+    ], 
+    "services": [
+        {
+            "enabled": true, 
+            "name": "openshift-console"
+        }
+    ], 
+    "url": "", 
+    "users": [], 
+    "uuid": "16A67CB082B411E2AC937699AC1F0212", 
+    "version": 29
+}

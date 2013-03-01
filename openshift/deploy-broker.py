@@ -83,6 +83,11 @@ def deploy():
     broker.install("openshift-broker", {"mongo_database": "openshift", "mongo_user": "openshift", "mongo_password": mongo_pw})
     track_changes(broker)
 
+    # Install Console
+    print "Installing Openshift Web Console"
+    broker.install("openshift-console", {})
+    track_changes(broker)
+
     # Cleanup changes
     broker.changes().clear()
 
