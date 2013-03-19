@@ -13,12 +13,6 @@ def setup():
 
     print "Setting up ComodIT..."
 
-    # Purchase distribution (if not already present in organization)
-    try:
-        org.get_distribution(data.centos['name'])
-    except EntityNotFoundException as e:
-        dist = org.purchased_dists().create(data.centos['pub_uuid'], data.centos['name'])
-
     # Create environment (if not already present)
     try:
         org.environments().create("Cluster", "Environment containing the web cluster.")

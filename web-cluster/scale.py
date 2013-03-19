@@ -55,7 +55,7 @@ def scale(count):
     hosts = []
     for i in range(index, index + int(count)):
         name = 'Web %s' % i
-        web_host = create_host(env, name, data.ec2, data.centos, [data.web])
+        web_host = create_host(env, name, config.platform, config.distribution, [data.web])
         web_host.provision()
         hosts.append(web_host)
 

@@ -4,3 +4,16 @@ password = "pass"
 organization = "My organization"
 time_out = 60 * 30 # seconds
 email = "me@example.com"
+
+platform = {"name" : "EC2",
+            "settings" : {
+                     "ec2.instanceType": "t1.micro",
+                     "ec2.securityGroups": "default",
+                     "ec2.zone": "eu-west-1a",
+                     "ec2.keyPair": "<Key name>"
+                         }
+            }
+
+distribution = {"name" : "CentOS 6.3 (AMI)",
+          "settings" : {}
+          }

@@ -12,12 +12,6 @@ def clean_up():
 
     print "Cleaning up ComodIT..."
 
-    # Delete distribution (if not in use by a host)
-    try:
-        org.distributions().delete(data.centos['name'])
-    except:
-        pass
-
     # Delete environment (if empty)
     env = org.get_environment('Cluster')
     if len(env.hosts().list()) == 0:

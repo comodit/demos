@@ -27,7 +27,7 @@ def deploy():
     try:
         db_host = env.get_host('DB Master')
     except EntityNotFoundException:
-        db_host = create_host(env, 'DB Master', data.ec2, data.centos, [data.db])
+        db_host = create_host(env, 'DB Master', config.platform, config.distribution, [data.db])
         print "Deploying DB Master"
         db_host.provision()
 
@@ -35,7 +35,7 @@ def deploy():
     try:
         web_host = env.get_host('Web 1')
     except EntityNotFoundException:
-        web_host = create_host(env, 'Web 1', data.ec2, data.centos, [data.web])
+        web_host = create_host(env, 'Web 1', config.platform, config.distribution, [data.web])
         print "Deploying Web 1"
         web_host.provision()
 
@@ -43,7 +43,7 @@ def deploy():
     try:
         lb_host = env.get_host('LB')
     except EntityNotFoundException:
-        lb_host = create_host(env, 'LB', data.ec2, data.centos, [data.lb])
+        lb_host = create_host(env, 'LB', config.platform, config.distribution, [data.lb])
         print "Deploying LB"
         lb_host.provision()
 

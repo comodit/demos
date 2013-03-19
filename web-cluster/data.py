@@ -1,17 +1,3 @@
-# EC2 platform description
-ec2 = {"name" : "EC2",
-       "settings" : {
-                     "ec2.instanceType": "t1.micro",
-                     "ec2.securityGroups": "demo"
-                     }
-       }
-
-# CentOS image description
-centos = {"name" : "CentOS 6.3 (AMI)",
-          "pub_uuid" : "A82DCF50661F11E2960D58C2AC1F0212",
-          "settings" : {}
-          }
-
 db = {"name" : "Cluster-Database",
       "settings" : {
                     "root_pass" : "uLz01PcA",

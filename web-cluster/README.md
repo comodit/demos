@@ -24,15 +24,15 @@ through our other [support channels](http://www.comodit.com/resources/support.ht
 In order to execute this example, you need:
 
 1. a ComodIT account,
-2. an organization containing a platform called "EC2" and using *AmazonEC2* driver.
+2. an organization containing a valid platform and a valid distribution.
 3. the ComodIT Python library (bundled with command-line interface, see [this
 tutorial](http://comodit.com/resources/tutorials/cli.html) for information about
 how to install it).
 
 ## Usage
 
-1. Rename *config.py.sample* into *config.py* and fill-in your ComodIT credentials
-and organization name.
+1. Rename *config.py.sample* into *config.py*, fill-in your ComodIT credentials
+and organization name, and configure your distribution and platform.
 2. Setup ComodIT by executing *setup.py*.
 3. Deploy the initial cluster by executing *deploy.py*.
 4. Test the cluster by connecting to given public hostname with your browser.
@@ -63,7 +63,7 @@ The other files and directory have the following role:
 
 - *config.py.sample*: contains some configuration variables, in particular the
 credentials to connect to ComodIT; must be updated and renamed into *config.py*.
-- *data.py*: some data describing the hosts and their configuration.
+- *data.py*: some data describing applications' configuration.
 - *helper.py*: defines some helpers.
 - *db*, *lb*, *web*: directories containing the recipes of the applications used
 to create the web cluster.
