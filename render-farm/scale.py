@@ -40,15 +40,15 @@ def scale(count):
 
     # Prepare NFS Configuration
     master_ip = nfs_master.get_instance().wait_for_property("ip.eth0", config.time_out)
-    location = "%s:/data" % master_ip   
+    location = "%s:/data" % master_ip
 
     # Deploy the required number of hosts
     hosts = []
     for i in range(index, index + int(count)):
         name = 'Render Server %s' % i
-        render_host = create_host(env, name, config.platform, config.distribution, [{"name":"NFS Client", "settings": {"shares": [{"key":"data", "location": location, "options": "rw,soft,intr,rsize=8192,wsize=8192"}]}, {"name": "Blender", "settings": {}}])
+        render_host = create_host(env, name, config.platform, config.distribution, [{"name": "NFS Client", "settings": {"shares": [{"key": "data", "location": location, "options": "rw,soft,intr,rsize=8192,wsize=8192"}]}}, {"name": "Blender", "settings": {}}])
         render_host.provision()
-        hosts.append(render_host)    
+        hosts.append(render_host)
 
     # Wait and configured provisioned hosts
     for h in hosts:
