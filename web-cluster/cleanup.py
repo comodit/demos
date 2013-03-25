@@ -4,6 +4,7 @@ import config, data
 
 from comodit_client.api import Client
 from comodit_client.api.importer import Import
+from comodit_client.api.collection import EntityNotFoundException
 
 def clean_up():
     # Connect to the ComodIT API
@@ -13,9 +14,12 @@ def clean_up():
     print "Cleaning up ComodIT..."
 
     # Delete environment (if empty)
-    env = org.get_environment('Cluster')
-    if len(env.hosts().list()) == 0:
-        env.delete()
+    try:
+        env = org.get_environment('Cluster')
+        if len(env.hosts().list()) == 0:
+            env.delete()
+    except EntityNotFoundException:
+        pass
 
     # Delete applications
     org.applications().delete(data.db['name'])
